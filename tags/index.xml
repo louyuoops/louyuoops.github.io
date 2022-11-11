@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on LouYu&#39;s Space</title>
-    <link>https://louyuoops.github.io/tags/</link>
+    <link>https://www.louyu.blog/tags/</link>
     <description>Recent content in Tags on LouYu&#39;s Space</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>LouYu</copyright><atom:link href="https://louyuoops.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>LouYu</copyright><atom:link href="https://www.louyu.blog/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
