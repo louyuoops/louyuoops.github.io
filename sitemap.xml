@@ -2,13 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://www.louyu.blog/posts/2022-11-13-character-encoding/</loc>
+    <lastmod>2022-11-13T19:11:20+08:00</lastmod>
+  </url><url>
+    <loc>https://www.louyu.blog/</loc>
+    <lastmod>2022-11-13T19:11:20+08:00</lastmod>
+  </url><url>
+    <loc>https://www.louyu.blog/posts/</loc>
+    <lastmod>2022-11-13T19:11:20+08:00</lastmod>
+  </url><url>
+    <loc>https://www.louyu.blog/tags/</loc>
+    <lastmod>2022-11-13T19:11:20+08:00</lastmod>
+  </url><url>
+    <loc>https://www.louyu.blog/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/</loc>
+    <lastmod>2022-11-13T19:11:20+08:00</lastmod>
+  </url><url>
     <loc>https://www.louyu.blog/about/</loc>
     <lastmod>2022-11-10T18:16:18+08:00</lastmod>
   </url><url>
     <loc>https://www.louyu.blog/categories/</loc>
-  </url><url>
-    <loc>https://www.louyu.blog/</loc>
-  </url><url>
-    <loc>https://www.louyu.blog/tags/</loc>
   </url>
 </urlset>

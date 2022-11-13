@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Character Encoding | LouYu&#39;s Space</title>
+  <link rel = 'canonical' href = 'https://www.louyu.blog/posts/2022-11-13-character-encoding/'>
+  <meta name="description" content="This blog is mainly used to record some of my technical growth and thinking;
+ mainly about ctf, programing, or job">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Character Encoding" />
+<meta property="og:description" content="目录 字符编码
+什么是字符编码
+ASCII码
+GB2312，GBK编码
+GB2312-1980编码
+GBK编码
+unicode编码
+utf编码
+UTF-8
+UTF-16
+UTF-32
+关于字节序
+问题
+字符编码转换工具
+字符编码 ctf刷题过程突然对字符编码转换有点疑惑，查询资料总结一下常见的字符编码
+什么是字符编码 字符编码词条的解释为[百度词条]：
+字符编码（英语：Character encoding）也称字集码，是把字符集中的字符编码为指定集合中某一对象（例如：比特模式、自然数序列、8位组或者电脉冲），以便文本在计算机中存储和通过通信网络的传递。常见的例子包括将拉丁字母表编码成摩斯电码和ASCII。其中，ASCII将字母、数字和其它符号编号，并用7比特的二进制来表示这个整数。通常会额外使用一个扩充的比特，以便于以1个字节的方式存储。
+作为计算机相关专业的学生，也许最开始入学学习编程时，都会接触到ASCII编码这个玩意，说得通俗点，这个就是将英语体系中的常见字符用数字编号，然后方便计算机去理解这是一个什么字符。
+但是ASCII编码作为早期计算机的标准字符编码，在后续的发展过程中不再适用于所有国家的字符集，所以后续逐渐发展出很多字符编码，GB2312，BIG5，unicode，utf-8，utf-16等。
+#️⃣本篇文章主要学习ASCII编码到GB2312，unicode到uutf-8编码的发展以及特点
+ASCII码 全称 American Standard Code For Information Interchange.
+依稀记得大学时买的《C Primer Plus》翻开书第一页便印着ASCII码表，当时第一印象便是以后书里面便会用前面标注的数字来代替相应的字符。
+由于计算机是一个二进制的电路集成，所以计算机对字符理解只有0和1的组合，一个0或1称为一个bit，ASCii码是使用一个字节(8 bit)来表示一个字符。而一个字节表示表示的数是有上限（有符号整数）的，容量范围是0-128。其中ASCII 表中的前 32 个字符是不可打印的控制代码，用于控制打印机等外围设备。
+但是127个字符显然无法保存所有国家的字符，后来在ASCII码的基础上补充了ASCII扩展码，也就是128-255表示的一些奇奇怪怪的字符。
+GB2312，GBK编码 当计算机流入了具有上下五千年文化的大中国之后，突然有个问题，咱也不太熟悉英文，该怎么让计算机理解我们那么多的文字呢。显然一个字节扩展也只能表示255个字符，当时有个ANSI编码，意思就是用两个字节来延伸扩展字符编码；它并不是一个具体的字符编码集，而是一个通俗的标准吧（比如我国在ANSI基础上的编码为GB2312，日文在ANSI编码基础上的编码为JIS），又称为MBCS(Multiple-Bytes Character Set)多字节字符集。所以那时在ANSI编码的基础上发展处了适用于汉语的GB2312编码；而GBK编码是由于后来发现GB2312编码集并不能表示更多的汉字了，再次基础上有了一个扩展编码就是GBK。
+GB2312-1980编码 GB2312-1980是1980发布的一般标准，GB2312使用一个94x94的矩阵来存储字符信息，其中每一行称为一个“区”，每一列称为一个“位”，矩阵中的每一个元素就是用区位码来表示。如第一个汉字“啊”出现在第16区的第1位上，其区位码为1601。
+分区范围 符号类型 第01区 中文标点、数学符号以及一些特殊字符 第02区 各种各样的数字序号 第03区 半角西文字符 第04区 日文平假名 第05区 日文片假名 第06区 希腊字母表 第07区 俄文字母表 第08区 中文拼音字母表 第09区 制表符号 第10－15区 无字符 第16－55区 一级汉字（以拼音字母排序， 共3755个） 第56－87区 二级汉字（以部首笔画排序， 共3008个） 第88－94区 无字符 https://www." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.louyu.blog/posts/2022-11-13-character-encoding/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-13T19:11:20+08:00" />
+<meta property="article:modified_time" content="2022-11-13T19:11:20+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Character Encoding"/>
+<meta name="twitter:description" content="目录 字符编码
+什么是字符编码
+ASCII码
+GB2312，GBK编码
+GB2312-1980编码
+GBK编码
+unicode编码
+utf编码
+UTF-8
+UTF-16
+UTF-32
+关于字节序
+问题
+字符编码转换工具
+字符编码 ctf刷题过程突然对字符编码转换有点疑惑，查询资料总结一下常见的字符编码
+什么是字符编码 字符编码词条的解释为[百度词条]：
+字符编码（英语：Character encoding）也称字集码，是把字符集中的字符编码为指定集合中某一对象（例如：比特模式、自然数序列、8位组或者电脉冲），以便文本在计算机中存储和通过通信网络的传递。常见的例子包括将拉丁字母表编码成摩斯电码和ASCII。其中，ASCII将字母、数字和其它符号编号，并用7比特的二进制来表示这个整数。通常会额外使用一个扩充的比特，以便于以1个字节的方式存储。
+作为计算机相关专业的学生，也许最开始入学学习编程时，都会接触到ASCII编码这个玩意，说得通俗点，这个就是将英语体系中的常见字符用数字编号，然后方便计算机去理解这是一个什么字符。
+但是ASCII编码作为早期计算机的标准字符编码，在后续的发展过程中不再适用于所有国家的字符集，所以后续逐渐发展出很多字符编码，GB2312，BIG5，unicode，utf-8，utf-16等。
+#️⃣本篇文章主要学习ASCII编码到GB2312，unicode到uutf-8编码的发展以及特点
+ASCII码 全称 American Standard Code For Information Interchange.
+依稀记得大学时买的《C Primer Plus》翻开书第一页便印着ASCII码表，当时第一印象便是以后书里面便会用前面标注的数字来代替相应的字符。
+由于计算机是一个二进制的电路集成，所以计算机对字符理解只有0和1的组合，一个0或1称为一个bit，ASCii码是使用一个字节(8 bit)来表示一个字符。而一个字节表示表示的数是有上限（有符号整数）的，容量范围是0-128。其中ASCII 表中的前 32 个字符是不可打印的控制代码，用于控制打印机等外围设备。
+但是127个字符显然无法保存所有国家的字符，后来在ASCII码的基础上补充了ASCII扩展码，也就是128-255表示的一些奇奇怪怪的字符。
+GB2312，GBK编码 当计算机流入了具有上下五千年文化的大中国之后，突然有个问题，咱也不太熟悉英文，该怎么让计算机理解我们那么多的文字呢。显然一个字节扩展也只能表示255个字符，当时有个ANSI编码，意思就是用两个字节来延伸扩展字符编码；它并不是一个具体的字符编码集，而是一个通俗的标准吧（比如我国在ANSI基础上的编码为GB2312，日文在ANSI编码基础上的编码为JIS），又称为MBCS(Multiple-Bytes Character Set)多字节字符集。所以那时在ANSI编码的基础上发展处了适用于汉语的GB2312编码；而GBK编码是由于后来发现GB2312编码集并不能表示更多的汉字了，再次基础上有了一个扩展编码就是GBK。
+GB2312-1980编码 GB2312-1980是1980发布的一般标准，GB2312使用一个94x94的矩阵来存储字符信息，其中每一行称为一个“区”，每一列称为一个“位”，矩阵中的每一个元素就是用区位码来表示。如第一个汉字“啊”出现在第16区的第1位上，其区位码为1601。
+分区范围 符号类型 第01区 中文标点、数学符号以及一些特殊字符 第02区 各种各样的数字序号 第03区 半角西文字符 第04区 日文平假名 第05区 日文片假名 第06区 希腊字母表 第07区 俄文字母表 第08区 中文拼音字母表 第09区 制表符号 第10－15区 无字符 第16－55区 一级汉字（以拼音字母排序， 共3755个） 第56－87区 二级汉字（以部首笔画排序， 共3008个） 第88－94区 无字符 https://www."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://www.louyu.blog/css/styles.410bad3eb22f9a2fd6dc44770b2f2bbdfd39ea98803d52dd33637b0894f9851f1db5c9c4bd1d9c557fe77b2586f461dcf8deb46219d638d648d6f87bfd76e2b2.css" integrity="sha512-QQutPrIvmi/W3ER3Cy8rvf056piAPVLdM2N7CJT5hR8dtcnEvR2cVX/neyWG9GHc&#43;N60YhnWONZI1vh7/Xbisg=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://www.louyu.blog/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts">Writings</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://www.louyu.blog/about/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&text=Character%20Encoding" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&title=Character%20Encoding" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&is_video=false&description=Character%20Encoding" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=Character%20Encoding&body=Check out this article: https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&title=Character%20Encoding" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&title=Character%20Encoding" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&name=Character%20Encoding&description=%e7%9b%ae%e5%bd%95%20%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%0a%e4%bb%80%e4%b9%88%e6%98%af%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%0aASCII%e7%a0%81%0aGB2312%ef%bc%8cGBK%e7%bc%96%e7%a0%81%0aGB2312-1980%e7%bc%96%e7%a0%81%0aGBK%e7%bc%96%e7%a0%81%0aunicode%e7%bc%96%e7%a0%81%0autf%e7%bc%96%e7%a0%81%0aUTF-8%0aUTF-16%0aUTF-32%0a%e5%85%b3%e4%ba%8e%e5%ad%97%e8%8a%82%e5%ba%8f%0a%e9%97%ae%e9%a2%98%0a%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%e8%bd%ac%e6%8d%a2%e5%b7%a5%e5%85%b7%0a%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%20ctf%e5%88%b7%e9%a2%98%e8%bf%87%e7%a8%8b%e7%aa%81%e7%84%b6%e5%af%b9%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%e8%bd%ac%e6%8d%a2%e6%9c%89%e7%82%b9%e7%96%91%e6%83%91%ef%bc%8c%e6%9f%a5%e8%af%a2%e8%b5%84%e6%96%99%e6%80%bb%e7%bb%93%e4%b8%80%e4%b8%8b%e5%b8%b8%e8%a7%81%e7%9a%84%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%0a%e4%bb%80%e4%b9%88%e6%98%af%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%20%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%e8%af%8d%e6%9d%a1%e7%9a%84%e8%a7%a3%e9%87%8a%e4%b8%ba%5b%e7%99%be%e5%ba%a6%e8%af%8d%e6%9d%a1%5d%ef%bc%9a%0a%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%ef%bc%88%e8%8b%b1%e8%af%ad%ef%bc%9aCharacter%20encoding%ef%bc%89%e4%b9%9f%e7%a7%b0%e5%ad%97%e9%9b%86%e7%a0%81%ef%bc%8c%e6%98%af%e6%8a%8a%e5%ad%97%e7%ac%a6%e9%9b%86%e4%b8%ad%e7%9a%84%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%e4%b8%ba%e6%8c%87%e5%ae%9a%e9%9b%86%e5%90%88%e4%b8%ad%e6%9f%90%e4%b8%80%e5%af%b9%e8%b1%a1%ef%bc%88%e4%be%8b%e5%a6%82%ef%bc%9a%e6%af%94%e7%89%b9%e6%a8%a1%e5%bc%8f%e3%80%81%e8%87%aa%e7%84%b6%e6%95%b0%e5%ba%8f%e5%88%97%e3%80%818%e4%bd%8d%e7%bb%84%e6%88%96%e8%80%85%e7%94%b5%e8%84%89%e5%86%b2%ef%bc%89%ef%bc%8c%e4%bb%a5%e4%be%bf%e6%96%87%e6%9c%ac%e5%9c%a8%e8%ae%a1%e7%ae%97%e6%9c%ba%e4%b8%ad%e5%ad%98%e5%82%a8%e5%92%8c%e9%80%9a%e8%bf%87%e9%80%9a%e4%bf%a1%e7%bd%91%e7%bb%9c%e7%9a%84%e4%bc%a0%e9%80%92%e3%80%82%e5%b8%b8%e8%a7%81%e7%9a%84%e4%be%8b%e5%ad%90%e5%8c%85%e6%8b%ac%e5%b0%86%e6%8b%89%e4%b8%81%e5%ad%97%e6%af%8d%e8%a1%a8%e7%bc%96%e7%a0%81%e6%88%90%e6%91%a9%e6%96%af%e7%94%b5%e7%a0%81%e5%92%8cASCII%e3%80%82%e5%85%b6%e4%b8%ad%ef%bc%8cASCII%e5%b0%86%e5%ad%97%e6%af%8d%e3%80%81%e6%95%b0%e5%ad%97%e5%92%8c%e5%85%b6%e5%ae%83%e7%ac%a6%e5%8f%b7%e7%bc%96%e5%8f%b7%ef%bc%8c%e5%b9%b6%e7%94%a87%e6%af%94%e7%89%b9%e7%9a%84%e4%ba%8c%e8%bf%9b%e5%88%b6%e6%9d%a5%e8%a1%a8%e7%a4%ba%e8%bf%99%e4%b8%aa%e6%95%b4%e6%95%b0%e3%80%82%e9%80%9a%e5%b8%b8%e4%bc%9a%e9%a2%9d%e5%a4%96%e4%bd%bf%e7%94%a8%e4%b8%80%e4%b8%aa%e6%89%a9%e5%85%85%e7%9a%84%e6%af%94%e7%89%b9%ef%bc%8c%e4%bb%a5%e4%be%bf%e4%ba%8e%e4%bb%a51%e4%b8%aa%e5%ad%97%e8%8a%82%e7%9a%84%e6%96%b9%e5%bc%8f%e5%ad%98%e5%82%a8%e3%80%82%0a%e4%bd%9c%e4%b8%ba%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%9b%b8%e5%85%b3%e4%b8%93%e4%b8%9a%e7%9a%84%e5%ad%a6%e7%94%9f%ef%bc%8c%e4%b9%9f%e8%ae%b8%e6%9c%80%e5%bc%80%e5%a7%8b%e5%85%a5%e5%ad%a6%e5%ad%a6%e4%b9%a0%e7%bc%96%e7%a8%8b%e6%97%b6%ef%bc%8c%e9%83%bd%e4%bc%9a%e6%8e%a5%e8%a7%a6%e5%88%b0ASCII%e7%bc%96%e7%a0%81%e8%bf%99%e4%b8%aa%e7%8e%a9%e6%84%8f%ef%bc%8c%e8%af%b4%e5%be%97%e9%80%9a%e4%bf%97%e7%82%b9%ef%bc%8c%e8%bf%99%e4%b8%aa%e5%b0%b1%e6%98%af%e5%b0%86%e8%8b%b1%e8%af%ad%e4%bd%93%e7%b3%bb%e4%b8%ad%e7%9a%84%e5%b8%b8%e8%a7%81%e5%ad%97%e7%ac%a6%e7%94%a8%e6%95%b0%e5%ad%97%e7%bc%96%e5%8f%b7%ef%bc%8c%e7%84%b6%e5%90%8e%e6%96%b9%e4%be%bf%e8%ae%a1%e7%ae%97%e6%9c%ba%e5%8e%bb%e7%90%86%e8%a7%a3%e8%bf%99%e6%98%af%e4%b8%80%e4%b8%aa%e4%bb%80%e4%b9%88%e5%ad%97%e7%ac%a6%e3%80%82%0a%e4%bd%86%e6%98%afASCII%e7%bc%96%e7%a0%81%e4%bd%9c%e4%b8%ba%e6%97%a9%e6%9c%9f%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%9a%84%e6%a0%87%e5%87%86%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%ef%bc%8c%e5%9c%a8%e5%90%8e%e7%bb%ad%e7%9a%84%e5%8f%91%e5%b1%95%e8%bf%87%e7%a8%8b%e4%b8%ad%e4%b8%8d%e5%86%8d%e9%80%82%e7%94%a8%e4%ba%8e%e6%89%80%e6%9c%89%e5%9b%bd%e5%ae%b6%e7%9a%84%e5%ad%97%e7%ac%a6%e9%9b%86%ef%bc%8c%e6%89%80%e4%bb%a5%e5%90%8e%e7%bb%ad%e9%80%90%e6%b8%90%e5%8f%91%e5%b1%95%e5%87%ba%e5%be%88%e5%a4%9a%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%ef%bc%8cGB2312%ef%bc%8cBIG5%ef%bc%8cunicode%ef%bc%8cutf-8%ef%bc%8cutf-16%e7%ad%89%e3%80%82%0a%23%ef%b8%8f%e2%83%a3%e6%9c%ac%e7%af%87%e6%96%87%e7%ab%a0%e4%b8%bb%e8%a6%81%e5%ad%a6%e4%b9%a0ASCII%e7%bc%96%e7%a0%81%e5%88%b0GB2312%ef%bc%8cunicode%e5%88%b0uutf-8%e7%bc%96%e7%a0%81%e7%9a%84%e5%8f%91%e5%b1%95%e4%bb%a5%e5%8f%8a%e7%89%b9%e7%82%b9%0aASCII%e7%a0%81%20%e5%85%a8%e7%a7%b0%20American%20Standard%20Code%20For%20Information%20Interchange.%0a%e4%be%9d%e7%a8%80%e8%ae%b0%e5%be%97%e5%a4%a7%e5%ad%a6%e6%97%b6%e4%b9%b0%e7%9a%84%e3%80%8aC%20Primer%20Plus%e3%80%8b%e7%bf%bb%e5%bc%80%e4%b9%a6%e7%ac%ac%e4%b8%80%e9%a1%b5%e4%be%bf%e5%8d%b0%e7%9d%80ASCII%e7%a0%81%e8%a1%a8%ef%bc%8c%e5%bd%93%e6%97%b6%e7%ac%ac%e4%b8%80%e5%8d%b0%e8%b1%a1%e4%be%bf%e6%98%af%e4%bb%a5%e5%90%8e%e4%b9%a6%e9%87%8c%e9%9d%a2%e4%be%bf%e4%bc%9a%e7%94%a8%e5%89%8d%e9%9d%a2%e6%a0%87%e6%b3%a8%e7%9a%84%e6%95%b0%e5%ad%97%e6%9d%a5%e4%bb%a3%e6%9b%bf%e7%9b%b8%e5%ba%94%e7%9a%84%e5%ad%97%e7%ac%a6%e3%80%82%0a%e7%94%b1%e4%ba%8e%e8%ae%a1%e7%ae%97%e6%9c%ba%e6%98%af%e4%b8%80%e4%b8%aa%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%9a%84%e7%94%b5%e8%b7%af%e9%9b%86%e6%88%90%ef%bc%8c%e6%89%80%e4%bb%a5%e8%ae%a1%e7%ae%97%e6%9c%ba%e5%af%b9%e5%ad%97%e7%ac%a6%e7%90%86%e8%a7%a3%e5%8f%aa%e6%9c%890%e5%92%8c1%e7%9a%84%e7%bb%84%e5%90%88%ef%bc%8c%e4%b8%80%e4%b8%aa0%e6%88%961%e7%a7%b0%e4%b8%ba%e4%b8%80%e4%b8%aabit%ef%bc%8cASCii%e7%a0%81%e6%98%af%e4%bd%bf%e7%94%a8%e4%b8%80%e4%b8%aa%e5%ad%97%e8%8a%82%288%20bit%29%e6%9d%a5%e8%a1%a8%e7%a4%ba%e4%b8%80%e4%b8%aa%e5%ad%97%e7%ac%a6%e3%80%82%e8%80%8c%e4%b8%80%e4%b8%aa%e5%ad%97%e8%8a%82%e8%a1%a8%e7%a4%ba%e8%a1%a8%e7%a4%ba%e7%9a%84%e6%95%b0%e6%98%af%e6%9c%89%e4%b8%8a%e9%99%90%ef%bc%88%e6%9c%89%e7%ac%a6%e5%8f%b7%e6%95%b4%e6%95%b0%ef%bc%89%e7%9a%84%ef%bc%8c%e5%ae%b9%e9%87%8f%e8%8c%83%e5%9b%b4%e6%98%af0-128%e3%80%82%e5%85%b6%e4%b8%adASCII%20%e8%a1%a8%e4%b8%ad%e7%9a%84%e5%89%8d%2032%20%e4%b8%aa%e5%ad%97%e7%ac%a6%e6%98%af%e4%b8%8d%e5%8f%af%e6%89%93%e5%8d%b0%e7%9a%84%e6%8e%a7%e5%88%b6%e4%bb%a3%e7%a0%81%ef%bc%8c%e7%94%a8%e4%ba%8e%e6%8e%a7%e5%88%b6%e6%89%93%e5%8d%b0%e6%9c%ba%e7%ad%89%e5%a4%96%e5%9b%b4%e8%ae%be%e5%a4%87%e3%80%82%0a%e4%bd%86%e6%98%af127%e4%b8%aa%e5%ad%97%e7%ac%a6%e6%98%be%e7%84%b6%e6%97%a0%e6%b3%95%e4%bf%9d%e5%ad%98%e6%89%80%e6%9c%89%e5%9b%bd%e5%ae%b6%e7%9a%84%e5%ad%97%e7%ac%a6%ef%bc%8c%e5%90%8e%e6%9d%a5%e5%9c%a8ASCII%e7%a0%81%e7%9a%84%e5%9f%ba%e7%a1%80%e4%b8%8a%e8%a1%a5%e5%85%85%e4%ba%86ASCII%e6%89%a9%e5%b1%95%e7%a0%81%ef%bc%8c%e4%b9%9f%e5%b0%b1%e6%98%af128-255%e8%a1%a8%e7%a4%ba%e7%9a%84%e4%b8%80%e4%ba%9b%e5%a5%87%e5%a5%87%e6%80%aa%e6%80%aa%e7%9a%84%e5%ad%97%e7%ac%a6%e3%80%82%0aGB2312%ef%bc%8cGBK%e7%bc%96%e7%a0%81%20%e5%bd%93%e8%ae%a1%e7%ae%97%e6%9c%ba%e6%b5%81%e5%85%a5%e4%ba%86%e5%85%b7%e6%9c%89%e4%b8%8a%e4%b8%8b%e4%ba%94%e5%8d%83%e5%b9%b4%e6%96%87%e5%8c%96%e7%9a%84%e5%a4%a7%e4%b8%ad%e5%9b%bd%e4%b9%8b%e5%90%8e%ef%bc%8c%e7%aa%81%e7%84%b6%e6%9c%89%e4%b8%aa%e9%97%ae%e9%a2%98%ef%bc%8c%e5%92%b1%e4%b9%9f%e4%b8%8d%e5%a4%aa%e7%86%9f%e6%82%89%e8%8b%b1%e6%96%87%ef%bc%8c%e8%af%a5%e6%80%8e%e4%b9%88%e8%ae%a9%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%90%86%e8%a7%a3%e6%88%91%e4%bb%ac%e9%82%a3%e4%b9%88%e5%a4%9a%e7%9a%84%e6%96%87%e5%ad%97%e5%91%a2%e3%80%82%e6%98%be%e7%84%b6%e4%b8%80%e4%b8%aa%e5%ad%97%e8%8a%82%e6%89%a9%e5%b1%95%e4%b9%9f%e5%8f%aa%e8%83%bd%e8%a1%a8%e7%a4%ba255%e4%b8%aa%e5%ad%97%e7%ac%a6%ef%bc%8c%e5%bd%93%e6%97%b6%e6%9c%89%e4%b8%aaANSI%e7%bc%96%e7%a0%81%ef%bc%8c%e6%84%8f%e6%80%9d%e5%b0%b1%e6%98%af%e7%94%a8%e4%b8%a4%e4%b8%aa%e5%ad%97%e8%8a%82%e6%9d%a5%e5%bb%b6%e4%bc%b8%e6%89%a9%e5%b1%95%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%ef%bc%9b%e5%ae%83%e5%b9%b6%e4%b8%8d%e6%98%af%e4%b8%80%e4%b8%aa%e5%85%b7%e4%bd%93%e7%9a%84%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%e9%9b%86%ef%bc%8c%e8%80%8c%e6%98%af%e4%b8%80%e4%b8%aa%e9%80%9a%e4%bf%97%e7%9a%84%e6%a0%87%e5%87%86%e5%90%a7%ef%bc%88%e6%af%94%e5%a6%82%e6%88%91%e5%9b%bd%e5%9c%a8ANSI%e5%9f%ba%e7%a1%80%e4%b8%8a%e7%9a%84%e7%bc%96%e7%a0%81%e4%b8%baGB2312%ef%bc%8c%e6%97%a5%e6%96%87%e5%9c%a8ANSI%e7%bc%96%e7%a0%81%e5%9f%ba%e7%a1%80%e4%b8%8a%e7%9a%84%e7%bc%96%e7%a0%81%e4%b8%baJIS%ef%bc%89%ef%bc%8c%e5%8f%88%e7%a7%b0%e4%b8%baMBCS%28Multiple-Bytes%20Character%20Set%29%e5%a4%9a%e5%ad%97%e8%8a%82%e5%ad%97%e7%ac%a6%e9%9b%86%e3%80%82%e6%89%80%e4%bb%a5%e9%82%a3%e6%97%b6%e5%9c%a8ANSI%e7%bc%96%e7%a0%81%e7%9a%84%e5%9f%ba%e7%a1%80%e4%b8%8a%e5%8f%91%e5%b1%95%e5%a4%84%e4%ba%86%e9%80%82%e7%94%a8%e4%ba%8e%e6%b1%89%e8%af%ad%e7%9a%84GB2312%e7%bc%96%e7%a0%81%ef%bc%9b%e8%80%8cGBK%e7%bc%96%e7%a0%81%e6%98%af%e7%94%b1%e4%ba%8e%e5%90%8e%e6%9d%a5%e5%8f%91%e7%8e%b0GB2312%e7%bc%96%e7%a0%81%e9%9b%86%e5%b9%b6%e4%b8%8d%e8%83%bd%e8%a1%a8%e7%a4%ba%e6%9b%b4%e5%a4%9a%e7%9a%84%e6%b1%89%e5%ad%97%e4%ba%86%ef%bc%8c%e5%86%8d%e6%ac%a1%e5%9f%ba%e7%a1%80%e4%b8%8a%e6%9c%89%e4%ba%86%e4%b8%80%e4%b8%aa%e6%89%a9%e5%b1%95%e7%bc%96%e7%a0%81%e5%b0%b1%e6%98%afGBK%e3%80%82%0aGB2312-1980%e7%bc%96%e7%a0%81%20GB2312-1980%e6%98%af1980%e5%8f%91%e5%b8%83%e7%9a%84%e4%b8%80%e8%88%ac%e6%a0%87%e5%87%86%ef%bc%8cGB2312%e4%bd%bf%e7%94%a8%e4%b8%80%e4%b8%aa94x94%e7%9a%84%e7%9f%a9%e9%98%b5%e6%9d%a5%e5%ad%98%e5%82%a8%e5%ad%97%e7%ac%a6%e4%bf%a1%e6%81%af%ef%bc%8c%e5%85%b6%e4%b8%ad%e6%af%8f%e4%b8%80%e8%a1%8c%e7%a7%b0%e4%b8%ba%e4%b8%80%e4%b8%aa%e2%80%9c%e5%8c%ba%e2%80%9d%ef%bc%8c%e6%af%8f%e4%b8%80%e5%88%97%e7%a7%b0%e4%b8%ba%e4%b8%80%e4%b8%aa%e2%80%9c%e4%bd%8d%e2%80%9d%ef%bc%8c%e7%9f%a9%e9%98%b5%e4%b8%ad%e7%9a%84%e6%af%8f%e4%b8%80%e4%b8%aa%e5%85%83%e7%b4%a0%e5%b0%b1%e6%98%af%e7%94%a8%e5%8c%ba%e4%bd%8d%e7%a0%81%e6%9d%a5%e8%a1%a8%e7%a4%ba%e3%80%82%e5%a6%82%e7%ac%ac%e4%b8%80%e4%b8%aa%e6%b1%89%e5%ad%97%e2%80%9c%e5%95%8a%e2%80%9d%e5%87%ba%e7%8e%b0%e5%9c%a8%e7%ac%ac16%e5%8c%ba%e7%9a%84%e7%ac%ac1%e4%bd%8d%e4%b8%8a%ef%bc%8c%e5%85%b6%e5%8c%ba%e4%bd%8d%e7%a0%81%e4%b8%ba1601%e3%80%82%0a%e5%88%86%e5%8c%ba%e8%8c%83%e5%9b%b4%20%e7%ac%a6%e5%8f%b7%e7%b1%bb%e5%9e%8b%20%e7%ac%ac01%e5%8c%ba%20%e4%b8%ad%e6%96%87%e6%a0%87%e7%82%b9%e3%80%81%e6%95%b0%e5%ad%a6%e7%ac%a6%e5%8f%b7%e4%bb%a5%e5%8f%8a%e4%b8%80%e4%ba%9b%e7%89%b9%e6%ae%8a%e5%ad%97%e7%ac%a6%20%e7%ac%ac02%e5%8c%ba%20%e5%90%84%e7%a7%8d%e5%90%84%e6%a0%b7%e7%9a%84%e6%95%b0%e5%ad%97%e5%ba%8f%e5%8f%b7%20%e7%ac%ac03%e5%8c%ba%20%e5%8d%8a%e8%a7%92%e8%a5%bf%e6%96%87%e5%ad%97%e7%ac%a6%20%e7%ac%ac04%e5%8c%ba%20%e6%97%a5%e6%96%87%e5%b9%b3%e5%81%87%e5%90%8d%20%e7%ac%ac05%e5%8c%ba%20%e6%97%a5%e6%96%87%e7%89%87%e5%81%87%e5%90%8d%20%e7%ac%ac06%e5%8c%ba%20%e5%b8%8c%e8%85%8a%e5%ad%97%e6%af%8d%e8%a1%a8%20%e7%ac%ac07%e5%8c%ba%20%e4%bf%84%e6%96%87%e5%ad%97%e6%af%8d%e8%a1%a8%20%e7%ac%ac08%e5%8c%ba%20%e4%b8%ad%e6%96%87%e6%8b%bc%e9%9f%b3%e5%ad%97%e6%af%8d%e8%a1%a8%20%e7%ac%ac09%e5%8c%ba%20%e5%88%b6%e8%a1%a8%e7%ac%a6%e5%8f%b7%20%e7%ac%ac10%ef%bc%8d15%e5%8c%ba%20%e6%97%a0%e5%ad%97%e7%ac%a6%20%e7%ac%ac16%ef%bc%8d55%e5%8c%ba%20%e4%b8%80%e7%ba%a7%e6%b1%89%e5%ad%97%ef%bc%88%e4%bb%a5%e6%8b%bc%e9%9f%b3%e5%ad%97%e6%af%8d%e6%8e%92%e5%ba%8f%ef%bc%8c%20%e5%85%b13755%e4%b8%aa%ef%bc%89%20%e7%ac%ac56%ef%bc%8d87%e5%8c%ba%20%e4%ba%8c%e7%ba%a7%e6%b1%89%e5%ad%97%ef%bc%88%e4%bb%a5%e9%83%a8%e9%a6%96%e7%ac%94%e7%94%bb%e6%8e%92%e5%ba%8f%ef%bc%8c%20%e5%85%b13008%e4%b8%aa%ef%bc%89%20%e7%ac%ac88%ef%bc%8d94%e5%8c%ba%20%e6%97%a0%e5%ad%97%e7%ac%a6%20https%3a%2f%2fwww." aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&t=Character%20Encoding" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#目录">目录</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#gb2312-1980编码">GB2312-1980编码</a></li>
+    <li><a href="#gbk编码">GBK编码</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#utf-8">UTF-8</a></li>
+    <li><a href="#utf-16">UTF-16</a></li>
+    <li><a href="#utf-32">UTF-32</a></li>
+    <li><a href="#关于字节序">关于字节序</a></li>
+  </ul>
+</nav>
+    </div>
+    
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        Character Encoding
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2022-11-13 19:11:20 &#43;0800 &#43;0800" itemprop="datePublished">2022-11-13</time>
+          
+        </div>
+        
+        
+        <div class="article-read-time">
+          <i class="far fa-clock"></i>
+          
+          16 minute read
+        </div>
+        
+        
+        
+        <div class="article-tag">
+            <i class="fas fa-tag"></i>
+            
+            
+            <a class="tag-link" href="/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81" rel="tag">字符编码</a>
+            
+        </div>
+        
+      </div>
+    </header>
+
+  
+    
+    <div class="content" itemprop="articleBody">
+      <h2 id="目录">目录</h2>
+<ul>
+<li>
+<p><a href="#%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81">字符编码</a></p>
+</li>
+<li>
+<p><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81">什么是字符编码</a></p>
+</li>
+<li>
+<p><a href="#ascii%E7%A0%81">ASCII码</a></p>
+</li>
+<li>
+<p><a href="#gb2312gbk%E7%BC%96%E7%A0%81">GB2312，GBK编码</a></p>
+<ul>
+<li>
+<p><a href="#gb2312-1980%E7%BC%96%E7%A0%81">GB2312-1980编码</a></p>
+</li>
+<li>
+<p><a href="#gbk%E7%BC%96%E7%A0%81">GBK编码</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#unicode%E7%BC%96%E7%A0%81">unicode编码</a></p>
+</li>
+<li>
+<p><a href="#utf%E7%BC%96%E7%A0%81">utf编码</a></p>
+<ul>
+<li>
+<p><a href="#utf-8">UTF-8</a></p>
+</li>
+<li>
+<p><a href="#utf-16">UTF-16</a></p>
+</li>
+<li>
+<p><a href="#utf-32">UTF-32</a></p>
+</li>
+<li>
+<p><a href="#%E5%85%B3%E4%BA%8E%E5%AD%97%E8%8A%82%E5%BA%8F">关于字节序</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#%E9%97%AE%E9%A2%98">问题</a></p>
+</li>
+<li>
+<p><a href="#%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7">字符编码转换工具</a></p>
+</li>
+</ul>
+<h1 id="字符编码">字符编码</h1>
+<blockquote>
+<p><em>ctf刷题过程突然对字符编码转换有点疑惑，查询资料总结一下常见的字符编码</em></p>
+</blockquote>
+<h1 id="什么是字符编码">什么是字符编码</h1>
+<p>字符编码词条的解释为[百度词条]：</p>
+<p><em>字符编码（英语：Character encoding）也称字集码，是把</em><a href="https://baike.baidu.com/item/%E5%AD%97%E7%AC%A6%E9%9B%86?fromModule=lemma_inlink" title="字符集"><em>字符集</em></a><em>中的</em><a href="https://baike.baidu.com/item/%E5%AD%97%E7%AC%A6/4768913?fromModule=lemma_inlink" title="字符"><em>字符</em></a><a href="https://baike.baidu.com/item/%E7%BC%96%E7%A0%81?fromModule=lemma_inlink" title="编码"><em>编码</em></a><em>为指定</em><a href="https://baike.baidu.com/item/%E9%9B%86%E5%90%88?fromModule=lemma_inlink" title="集合"><em>集合</em></a><em>中某一</em><a href="https://baike.baidu.com/item/%E5%AF%B9%E8%B1%A1/17158?fromModule=lemma_inlink" title="对象"><em>对象</em></a><em>（例如：</em><a href="https://baike.baidu.com/item/%E6%AF%94%E7%89%B9/3431582?fromModule=lemma_inlink" title="比特"><em>比特</em></a><em>模式、</em><a href="https://baike.baidu.com/item/%E8%87%AA%E7%84%B6%E6%95%B0/385394?fromModule=lemma_inlink" title="自然数"><em>自然数</em></a><a href="https://baike.baidu.com/item/%E5%BA%8F%E5%88%97/1302588?fromModule=lemma_inlink" title="序列"><em>序列</em></a><em>、8位组或者</em><a href="https://baike.baidu.com/item/%E7%94%B5%E8%84%89%E5%86%B2/10706490?fromModule=lemma_inlink" title="电脉冲"><em>电脉冲</em></a><em>），以便</em><a href="https://baike.baidu.com/item/%E6%96%87%E6%9C%AC/5443630?fromModule=lemma_inlink" title="文本"><em>文本</em></a><em>在</em><a href="https://baike.baidu.com/item/%E8%AE%A1%E7%AE%97%E6%9C%BA/140338?fromModule=lemma_inlink" title="计算机"><em>计算机</em></a><em>中存储和通过通信</em><a href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C?fromModule=lemma_inlink" title="网络"><em>网络</em></a><em>的传递。常见的例子包括将</em><a href="https://baike.baidu.com/item/%E6%8B%89%E4%B8%81%E5%AD%97%E6%AF%8D%E8%A1%A8/9753254?fromModule=lemma_inlink" title="拉丁字母表"><em>拉丁字母表</em></a><em>编码成</em><a href="https://baike.baidu.com/item/%E6%91%A9%E6%96%AF%E7%94%B5%E7%A0%81/2667618?fromModule=lemma_inlink" title="摩斯电码"><em>摩斯电码</em></a><em>和</em><a href="https://baike.baidu.com/item/ASCII?fromModule=lemma_inlink" title="ASCII"><em>ASCII</em></a><em>。其中，</em><a href="https://baike.baidu.com/item/ASCII?fromModule=lemma_inlink" title="ASCII"><em>ASCII</em></a><em>将字母、数字和其它符号</em><a href="https://baike.baidu.com/item/%E7%BC%96%E5%8F%B7/1517267?fromModule=lemma_inlink" title="编号"><em>编号</em></a><em>，并用7</em><a href="https://baike.baidu.com/item/%E6%AF%94%E7%89%B9?fromModule=lemma_inlink" title="比特"><em>比特</em></a><em>的</em><a href="https://baike.baidu.com/item/%E4%BA%8C%E8%BF%9B%E5%88%B6/361457?fromModule=lemma_inlink" title="二进制"><em>二进制</em></a><em>来表示这个整数。通常会额外使用一个扩充的比特，以便于以1个</em><a href="https://baike.baidu.com/item/%E5%AD%97%E8%8A%82/1096318?fromModule=lemma_inlink" title="字节"><em>字节</em></a><em>的方式存储。</em></p>
+<p>作为计算机相关专业的学生，也许最开始入学学习编程时，都会接触到ASCII编码这个玩意，说得通俗点，这个就是将英语体系中的常见字符用数字编号，然后方便计算机去理解这是一个什么字符。</p>
+<p>但是ASCII编码作为早期计算机的标准字符编码，在后续的发展过程中不再适用于所有国家的字符集，所以后续逐渐发展出很多字符编码，GB2312，BIG5，unicode，utf-8，utf-16等。</p>
+<blockquote>
+<p>#️⃣本篇文章主要学习ASCII编码到GB2312，unicode到uutf-8编码的发展以及特点</p>
+</blockquote>
+<h1 id="ascii码">ASCII码</h1>
+<p>全称 American Standard Code For Information Interchange.</p>
+<p>依稀记得大学时买的《C Primer Plus》翻开书第一页便印着ASCII码表，当时第一印象便是以后书里面便会用前面标注的数字来代替相应的字符。</p>
+<p><img src="/image/%E6%88%AA%E5%B1%8F2022-11-13%2015.44.34__evFLkV0lC.png" alt="部分可打印字符ascii码表" title="部分可打印字符ascii码表"></p>
+<p>由于计算机是一个二进制的电路集成，所以计算机对字符理解只有0和1的组合，一个0或1称为一个bit，ASCii码是使用一个字节(8 bit)来表示一个字符。而一个字节表示表示的数是有上限（有符号整数）的，容量范围是0-128。其中ASCII 表中的前 32 个字符是不可打印的控制代码，用于控制打印机等外围设备。</p>
+<p>但是127个字符显然无法保存所有国家的字符，后来在ASCII码的基础上补充了ASCII扩展码，也就是128-255表示的一些奇奇怪怪的字符。</p>
+<p><img src="/image/%E6%88%AA%E5%B1%8F2022-11-13%2015.54.17__zmY6L5XnR.png" alt="部分ASCII扩展码" title="部分ASCII扩展码"></p>
+<h1 id="gb2312gbk编码">GB2312，GBK编码</h1>
+<p>当计算机流入了具有上下五千年文化的大中国之后，突然有个问题，咱也不太熟悉英文，该怎么让计算机理解我们那么多的文字呢。显然一个字节扩展也只能表示255个字符，当时有个ANSI编码，意思就是用两个字节来延伸扩展字符编码；它并不是一个具体的字符编码集，而是一个通俗的标准吧（比如我国在ANSI基础上的编码为GB2312，日文在ANSI编码基础上的编码为JIS），又称为MBCS(Multiple-Bytes Character Set)多字节字符集。所以那时在ANSI编码的基础上发展处了适用于汉语的GB2312编码；而GBK编码是由于后来发现GB2312编码集并不能表示更多的汉字了，再次基础上有了一个扩展编码就是GBK。</p>
+<h2 id="gb2312-1980编码">GB2312-1980编码</h2>
+<p>GB2312-1980是1980发布的一般标准，GB2312使用一个94x94的矩阵来存储字符信息，其中每一行称为一个“区”，每一列称为一个“位”，矩阵中的每一个元素就是用区位码来表示。如第一个汉字“啊”出现在第16区的第1位上，其区位码为1601。</p>
+<table>
+<thead>
+<tr>
+<th>分区范围</th>
+<th>符号类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第01区</td>
+<td>中文标点、数学符号以及一些特殊字符</td>
+</tr>
+<tr>
+<td>第02区</td>
+<td>各种各样的数字序号</td>
+</tr>
+<tr>
+<td>第03区</td>
+<td>半角西文字符</td>
+</tr>
+<tr>
+<td>第04区</td>
+<td>日文平假名</td>
+</tr>
+<tr>
+<td>第05区</td>
+<td>日文片假名</td>
+</tr>
+<tr>
+<td>第06区</td>
+<td>希腊字母表</td>
+</tr>
+<tr>
+<td>第07区</td>
+<td>俄文字母表</td>
+</tr>
+<tr>
+<td>第08区</td>
+<td>中文拼音字母表</td>
+</tr>
+<tr>
+<td>第09区</td>
+<td>制表符号</td>
+</tr>
+<tr>
+<td>第10－15区</td>
+<td>无字符</td>
+</tr>
+<tr>
+<td>第16－55区</td>
+<td>一级汉字（以拼音字母排序， 共3755个）</td>
+</tr>
+<tr>
+<td>第56－87区</td>
+<td>二级汉字（以部首笔画排序， 共3008个）</td>
+</tr>
+<tr>
+<td>第88－94区</td>
+<td>无字符</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.bejson.com/document/gb2312/">https://www.bejson.com/document/gb2312/</a></p>
+<p>GB2312虽然用区位码来表示字符在字符矩阵中的位置，但是并不是存储为区位码，比如词条中的例子，</p>
+<p><em>例如汉字‘珀’在GB2312中的区位码为7174，其两</em><a href="https://baike.baidu.com/item/%E5%AD%97%E8%8A%82?fromModule=lemma_inlink" title="字节"><em>字节</em></a><em>表示形式为71，74；而两个西文字符‘GJ’的存储码也是71,74。这种冲突将导致在解释编码时到底表示的是一个汉字还是两个西文字符将无法判断。</em></p>
+<p>所以GB2312存储时是将区码和位码分别加上A0H得到存储码，以71，74为例</p>
+<table>
+<thead>
+<tr>
+<th>区位码</th>
+<th>区位码（oct）</th>
+<th>区码转换</th>
+<th>位码转换</th>
+<th>存储码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>71，74</td>
+<td>474AH</td>
+<td>47H+A0H=E7H</td>
+<td>4AH+A0H=EAH</td>
+<td>E7EAH</td>
+</tr>
+</tbody>
+</table>
+<p>存储码又称为汉字内码，其实是由区位码进化到国标码(交换码)，再由国标码进化得到内码(存储码)</p>
+<ul>
+<li>
+<p>国标码=区位码+32</p>
+</li>
+<li>
+<p>内码=国标码+128</p>
+</li>
+</ul>
+<p>内码中每个字节最高位置都为1（就是加128）。</p>
+<h2 id="gbk编码">GBK编码</h2>
+<p>GB2312编码只收集了6000多个汉字，再加上少数民族文字，显然是不够用，后来在GB2312基础上扩展有了GBK编码，GBK主要利用了GB2312中没有使用到的码位，并且兼容GB2312。</p>
+<p>GBK编码最大的特点是将2字节的汉字字符和1字节的英文字符并存于一套字符集中。也就是说原本的ASCII编码集中127以下的字符是按照一字节存储的，其他则为双字节编码。</p>
+<p><img src="/image/v2-f4690b3ce741e8c690a4c6d92d399049_1440w_mwpZqi3Q.webp" alt=""></p>
+<p>其中红色部分是ASCII码和原本GB2312中的编码，绿色为GBK扩展部分，紫色为用户自定义编码范围</p>
+<p><a href="http://106.14.124.170/Encoding/GBK">http://106.14.124.170/Encoding/GBK</a></p>
+<h1 id="unicode编码">unicode编码</h1>
+<p>unicode编码是在ISO组织带领下，将所有字符用双字节表示发展出来的一种字符编码（UCS Universal Multiple-Octet Coded Character Set），对于ASCII编码来说，高位字节不足的补0；其实这就出现了一个问题，假如一个文档是全英文的，那么存储空间几乎就是多了一倍，这就浪费了一倍的空间；不过好处就是所有字符编码统一了。</p>
+<p>但是严格意义来说，unicode编码只是将字符编码了，也就是规定了字符的二进制编码，并没有规定应该如何存储字符；GB2312用区位码规定了每个字符的编码，但是也具体给出了使用存储码的方式来存储字符，用来区分和其他编码存储的不同。</p>
+<p>后来在万维网的发展下，就急需一个普适的传输编码，就有了UTF编码（UCS Transfer Format）。</p>
+<p><a href="https://unicode-table.com/cn/">https://unicode-table.com/cn/</a></p>
+<h1 id="utf编码">utf编码</h1>
+<p>utf编码是一个统称，主要包括utf-8，utf16，utf32编码。其中使用最为广泛的是utf-8。</p>
+<h2 id="utf-8">UTF-8</h2>
+<p>utf-8编码是一种变长编码，使用1-4个字节存储字符。</p>
+<p>UTF-8中分为单字节存储和多字节存储；</p>
+<ul>
+<li>
+<p>单字节存储，即保存ASCII字符集中127及以下的字符，所以utf-8兼容ASCII，解决了unicode中双字节存储浪费空间的问题。</p>
+</li>
+<li>
+<p>多字节存储，比如存储一个3(n)字节长的字符，第一个字节的前3(n)位为1，第2第3个字节(后续的字节)的前两位都为10，其余部分分别填入该字符的unicode编码一部分；加入顺序是从低位到高位，（逐次从unicode从的低位取6位填到utf-8的低位字节后6位中，直到取完，不足补0，如下面例子中最后0100补不齐5位，最后补了0）</p>
+</li>
+</ul>
+<p>举例</p>
+<p><img src="/image/v2-65a8af6278da721f053a46ab6931735c_1440w_Uz42Nch2.webp" alt=""></p>
+<h2 id="utf-16">UTF-16</h2>
+<p>utf-16编码规则：</p>
+<ol>
+<li>
+<p>对于 Unicode 码小于 <strong>0x10000</strong> 的字符， 使用 <strong>2</strong> 个字节存储，并且是直接存储 Unicode 码，不用进行编码转换</p>
+</li>
+<li>
+<p>对于 Unicode 码在 <strong>0x10000</strong> 和 <strong>0x10FFFF</strong> 之间的字符，使用 <strong>4</strong> 个字节存储，这 <strong>4</strong> 个字节分成前后两部分，每个部分各两个字节，其中，前面两个字节的前 <strong>6</strong> 位二进制固定为 <strong>110110</strong>，后面两个字节的前 6 位二进制固定为 <strong>110111</strong>, 前后部分各剩余 10 位二进制表示符号的 Unicode 码 减去 <strong>0x10000</strong> 的结果</p>
+</li>
+<li>
+<p>大于 <strong>0x10FFFF</strong> 的 Unicode 码无法用 UTF-16 编码</p>
+</li>
+</ol>
+<p><img src="/image/v2-664d266e37ff8496a55793b8a094a92b_r_mlIgo9j4U2.jpg" alt=""></p>
+<h2 id="utf-32">UTF-32</h2>
+<p>UTF-32 是固定长度的编码，始终占用 4 个字节，足以容纳所有的 Unicode 字符，所以直接存储 Unicode 码即可，不需要任何编码转换。虽然浪费了空间，但提高了效率。</p>
+<h2 id="关于字节序">关于字节序</h2>
+<p>utf-16因为使用双字节打包存储，需要分别大端小端序，大端小端这好理解，测试一下，分别以小端存储“Untitled-1”和大端存储“Untitled-2”</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&gt;&gt;&gt; <span style="color:#8be9fd;font-style:italic">fp</span> <span style="color:#ff79c6">=</span> open<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Untitled-1&#34;</span>, <span style="color:#f1fa8c">&#34;rb&#34;</span><span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>&gt;&gt;&gt; print<span style="color:#ff79c6">(</span>fp.read<span style="color:#ff79c6">())</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>b<span style="color:#f1fa8c">&#39;\xff\xfeu\x00t\x00f\x00-\x001\x006\x00Km\xd5\x8b&#39;</span>    // fffe开头是小端
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>&gt;&gt;&gt; <span style="color:#8be9fd;font-style:italic">fp</span> <span style="color:#ff79c6">=</span> open<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Untitled-2&#34;</span>, <span style="color:#f1fa8c">&#34;rb&#34;</span><span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>&gt;&gt;&gt; print<span style="color:#ff79c6">(</span>fp.read<span style="color:#ff79c6">())</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>b<span style="color:#f1fa8c">&#39;\xfe\xff\x00u\x00t\x00f\x00-\x001\x006mK\x8b\xd5\x002&#39;</span>  // feff开头是大端
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>&gt;&gt;&gt;
+</span></span></code></pre></div><p>utf-32也存在大端小端序。</p>
+<p>*但是UTF-32和UTF-16有一个很严重的问题——和C语言不兼容。因为C语言中_*<em><strong>0000 0000</strong>**_表示字符串结尾，而UTF-32和UTF-16中有很多字符高位都是0，和字符串结尾冲突了。</em></p>
+<p>上述所属的不兼容主要是由于utf-16和utf-32直接存储unicode编码导致，unicode编码中存在ASCII字符集中的127及以下的字符高位字节补0操作。</p>
+<h1 id="问题">问题</h1>
+<p>1: 为什么utf8不分大小端序？</p>
+<p>答：由于UTF-8的设计，一个字符对应的各个字节，是能够区分出 哪个是数据高位、哪个数据低位的，所以不需要。</p>
+<p><img src="/image/d96696d131944df0a45a66c3b6698069_tMZ4FHQnDZ.png" alt=""></p>
+<h1 id="字符编码转换工具">字符编码转换工具</h1>
+<p>linux&amp;mac工具</p>
+<ol>
+<li>
+<p>enc, 查看文件编码</p>
+</li>
+<li>
+<p>iconv，转换文件编码</p>
+</li>
+</ol>
+<p>在线工具</p>
+<p><a href="https://cyberchef.org/#recipe=Decode_text('UTF-8%20(65001)')Encode_text('UTF-8%20(65001)')">https://cyberchef.org/#recipe=Decode_text('UTF-8%20(65001)')Encode_text('UTF-8%20(65001)')</a></p>
+<p>参考资料</p>
+<p><a href="https://zhuanlan.zhihu.com/p/453675608" title="https://zhuanlan.zhihu.com/p/453675608">https://zhuanlan.zhihu.com/p/453675608</a></p>
+<p><a href="https://baike.baidu.com/item/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/8446880" title="https://baike.baidu.com/item/字符编码/8446880">https://baike.baidu.com/item/字符编码/8446880</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/427488961" title="https://zhuanlan.zhihu.com/p/427488961">https://zhuanlan.zhihu.com/p/427488961</a></p>
+<p><a href="https://baike.baidu.com/item/UTF-8/481798" title="https://baike.baidu.com/item/UTF-8/481798">https://baike.baidu.com/item/UTF-8/481798</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/45695434" title="https://zhuanlan.zhihu.com/p/45695434">https://zhuanlan.zhihu.com/p/45695434</a></p>
+<p><a href="https://blog.csdn.net/anlian523/article/details/120774417" title="(32条消息) 浅析——为什么UTF-16需要大端小端，而UTF-8不需要_anlian523的博客-CSDN博客_utf16大端小端">(32条消息) 浅析——为什么UTF-16需要大端小端，而UTF-8不需要_anlian523的博客-CSDN博客_utf16大端小端</a></p>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+  <div class="blog-post-comments">
+    
+      <div id="disquss_thread">
+  <script src="https://utteranc.es/client.js"
+    repo="louyuoops/hugo-blog-comments"
+    issue-term="pathname"
+    label=""
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+    
+  </div>
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/posts">Writings</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/about">About</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#目录">目录</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#gb2312-1980编码">GB2312-1980编码</a></li>
+    <li><a href="#gbk编码">GBK编码</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#utf-8">UTF-8</a></li>
+    <li><a href="#utf-16">UTF-16</a></li>
+    <li><a href="#utf-32">UTF-32</a></li>
+    <li><a href="#关于字节序">关于字节序</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&text=Character%20Encoding" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&title=Character%20Encoding" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&is_video=false&description=Character%20Encoding" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=Character%20Encoding&body=Check out this article: https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&title=Character%20Encoding" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&title=Character%20Encoding" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&name=Character%20Encoding&description=%e7%9b%ae%e5%bd%95%20%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%0a%e4%bb%80%e4%b9%88%e6%98%af%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%0aASCII%e7%a0%81%0aGB2312%ef%bc%8cGBK%e7%bc%96%e7%a0%81%0aGB2312-1980%e7%bc%96%e7%a0%81%0aGBK%e7%bc%96%e7%a0%81%0aunicode%e7%bc%96%e7%a0%81%0autf%e7%bc%96%e7%a0%81%0aUTF-8%0aUTF-16%0aUTF-32%0a%e5%85%b3%e4%ba%8e%e5%ad%97%e8%8a%82%e5%ba%8f%0a%e9%97%ae%e9%a2%98%0a%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%e8%bd%ac%e6%8d%a2%e5%b7%a5%e5%85%b7%0a%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%20ctf%e5%88%b7%e9%a2%98%e8%bf%87%e7%a8%8b%e7%aa%81%e7%84%b6%e5%af%b9%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%e8%bd%ac%e6%8d%a2%e6%9c%89%e7%82%b9%e7%96%91%e6%83%91%ef%bc%8c%e6%9f%a5%e8%af%a2%e8%b5%84%e6%96%99%e6%80%bb%e7%bb%93%e4%b8%80%e4%b8%8b%e5%b8%b8%e8%a7%81%e7%9a%84%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%0a%e4%bb%80%e4%b9%88%e6%98%af%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%20%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%e8%af%8d%e6%9d%a1%e7%9a%84%e8%a7%a3%e9%87%8a%e4%b8%ba%5b%e7%99%be%e5%ba%a6%e8%af%8d%e6%9d%a1%5d%ef%bc%9a%0a%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%ef%bc%88%e8%8b%b1%e8%af%ad%ef%bc%9aCharacter%20encoding%ef%bc%89%e4%b9%9f%e7%a7%b0%e5%ad%97%e9%9b%86%e7%a0%81%ef%bc%8c%e6%98%af%e6%8a%8a%e5%ad%97%e7%ac%a6%e9%9b%86%e4%b8%ad%e7%9a%84%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%e4%b8%ba%e6%8c%87%e5%ae%9a%e9%9b%86%e5%90%88%e4%b8%ad%e6%9f%90%e4%b8%80%e5%af%b9%e8%b1%a1%ef%bc%88%e4%be%8b%e5%a6%82%ef%bc%9a%e6%af%94%e7%89%b9%e6%a8%a1%e5%bc%8f%e3%80%81%e8%87%aa%e7%84%b6%e6%95%b0%e5%ba%8f%e5%88%97%e3%80%818%e4%bd%8d%e7%bb%84%e6%88%96%e8%80%85%e7%94%b5%e8%84%89%e5%86%b2%ef%bc%89%ef%bc%8c%e4%bb%a5%e4%be%bf%e6%96%87%e6%9c%ac%e5%9c%a8%e8%ae%a1%e7%ae%97%e6%9c%ba%e4%b8%ad%e5%ad%98%e5%82%a8%e5%92%8c%e9%80%9a%e8%bf%87%e9%80%9a%e4%bf%a1%e7%bd%91%e7%bb%9c%e7%9a%84%e4%bc%a0%e9%80%92%e3%80%82%e5%b8%b8%e8%a7%81%e7%9a%84%e4%be%8b%e5%ad%90%e5%8c%85%e6%8b%ac%e5%b0%86%e6%8b%89%e4%b8%81%e5%ad%97%e6%af%8d%e8%a1%a8%e7%bc%96%e7%a0%81%e6%88%90%e6%91%a9%e6%96%af%e7%94%b5%e7%a0%81%e5%92%8cASCII%e3%80%82%e5%85%b6%e4%b8%ad%ef%bc%8cASCII%e5%b0%86%e5%ad%97%e6%af%8d%e3%80%81%e6%95%b0%e5%ad%97%e5%92%8c%e5%85%b6%e5%ae%83%e7%ac%a6%e5%8f%b7%e7%bc%96%e5%8f%b7%ef%bc%8c%e5%b9%b6%e7%94%a87%e6%af%94%e7%89%b9%e7%9a%84%e4%ba%8c%e8%bf%9b%e5%88%b6%e6%9d%a5%e8%a1%a8%e7%a4%ba%e8%bf%99%e4%b8%aa%e6%95%b4%e6%95%b0%e3%80%82%e9%80%9a%e5%b8%b8%e4%bc%9a%e9%a2%9d%e5%a4%96%e4%bd%bf%e7%94%a8%e4%b8%80%e4%b8%aa%e6%89%a9%e5%85%85%e7%9a%84%e6%af%94%e7%89%b9%ef%bc%8c%e4%bb%a5%e4%be%bf%e4%ba%8e%e4%bb%a51%e4%b8%aa%e5%ad%97%e8%8a%82%e7%9a%84%e6%96%b9%e5%bc%8f%e5%ad%98%e5%82%a8%e3%80%82%0a%e4%bd%9c%e4%b8%ba%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%9b%b8%e5%85%b3%e4%b8%93%e4%b8%9a%e7%9a%84%e5%ad%a6%e7%94%9f%ef%bc%8c%e4%b9%9f%e8%ae%b8%e6%9c%80%e5%bc%80%e5%a7%8b%e5%85%a5%e5%ad%a6%e5%ad%a6%e4%b9%a0%e7%bc%96%e7%a8%8b%e6%97%b6%ef%bc%8c%e9%83%bd%e4%bc%9a%e6%8e%a5%e8%a7%a6%e5%88%b0ASCII%e7%bc%96%e7%a0%81%e8%bf%99%e4%b8%aa%e7%8e%a9%e6%84%8f%ef%bc%8c%e8%af%b4%e5%be%97%e9%80%9a%e4%bf%97%e7%82%b9%ef%bc%8c%e8%bf%99%e4%b8%aa%e5%b0%b1%e6%98%af%e5%b0%86%e8%8b%b1%e8%af%ad%e4%bd%93%e7%b3%bb%e4%b8%ad%e7%9a%84%e5%b8%b8%e8%a7%81%e5%ad%97%e7%ac%a6%e7%94%a8%e6%95%b0%e5%ad%97%e7%bc%96%e5%8f%b7%ef%bc%8c%e7%84%b6%e5%90%8e%e6%96%b9%e4%be%bf%e8%ae%a1%e7%ae%97%e6%9c%ba%e5%8e%bb%e7%90%86%e8%a7%a3%e8%bf%99%e6%98%af%e4%b8%80%e4%b8%aa%e4%bb%80%e4%b9%88%e5%ad%97%e7%ac%a6%e3%80%82%0a%e4%bd%86%e6%98%afASCII%e7%bc%96%e7%a0%81%e4%bd%9c%e4%b8%ba%e6%97%a9%e6%9c%9f%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%9a%84%e6%a0%87%e5%87%86%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%ef%bc%8c%e5%9c%a8%e5%90%8e%e7%bb%ad%e7%9a%84%e5%8f%91%e5%b1%95%e8%bf%87%e7%a8%8b%e4%b8%ad%e4%b8%8d%e5%86%8d%e9%80%82%e7%94%a8%e4%ba%8e%e6%89%80%e6%9c%89%e5%9b%bd%e5%ae%b6%e7%9a%84%e5%ad%97%e7%ac%a6%e9%9b%86%ef%bc%8c%e6%89%80%e4%bb%a5%e5%90%8e%e7%bb%ad%e9%80%90%e6%b8%90%e5%8f%91%e5%b1%95%e5%87%ba%e5%be%88%e5%a4%9a%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%ef%bc%8cGB2312%ef%bc%8cBIG5%ef%bc%8cunicode%ef%bc%8cutf-8%ef%bc%8cutf-16%e7%ad%89%e3%80%82%0a%23%ef%b8%8f%e2%83%a3%e6%9c%ac%e7%af%87%e6%96%87%e7%ab%a0%e4%b8%bb%e8%a6%81%e5%ad%a6%e4%b9%a0ASCII%e7%bc%96%e7%a0%81%e5%88%b0GB2312%ef%bc%8cunicode%e5%88%b0uutf-8%e7%bc%96%e7%a0%81%e7%9a%84%e5%8f%91%e5%b1%95%e4%bb%a5%e5%8f%8a%e7%89%b9%e7%82%b9%0aASCII%e7%a0%81%20%e5%85%a8%e7%a7%b0%20American%20Standard%20Code%20For%20Information%20Interchange.%0a%e4%be%9d%e7%a8%80%e8%ae%b0%e5%be%97%e5%a4%a7%e5%ad%a6%e6%97%b6%e4%b9%b0%e7%9a%84%e3%80%8aC%20Primer%20Plus%e3%80%8b%e7%bf%bb%e5%bc%80%e4%b9%a6%e7%ac%ac%e4%b8%80%e9%a1%b5%e4%be%bf%e5%8d%b0%e7%9d%80ASCII%e7%a0%81%e8%a1%a8%ef%bc%8c%e5%bd%93%e6%97%b6%e7%ac%ac%e4%b8%80%e5%8d%b0%e8%b1%a1%e4%be%bf%e6%98%af%e4%bb%a5%e5%90%8e%e4%b9%a6%e9%87%8c%e9%9d%a2%e4%be%bf%e4%bc%9a%e7%94%a8%e5%89%8d%e9%9d%a2%e6%a0%87%e6%b3%a8%e7%9a%84%e6%95%b0%e5%ad%97%e6%9d%a5%e4%bb%a3%e6%9b%bf%e7%9b%b8%e5%ba%94%e7%9a%84%e5%ad%97%e7%ac%a6%e3%80%82%0a%e7%94%b1%e4%ba%8e%e8%ae%a1%e7%ae%97%e6%9c%ba%e6%98%af%e4%b8%80%e4%b8%aa%e4%ba%8c%e8%bf%9b%e5%88%b6%e7%9a%84%e7%94%b5%e8%b7%af%e9%9b%86%e6%88%90%ef%bc%8c%e6%89%80%e4%bb%a5%e8%ae%a1%e7%ae%97%e6%9c%ba%e5%af%b9%e5%ad%97%e7%ac%a6%e7%90%86%e8%a7%a3%e5%8f%aa%e6%9c%890%e5%92%8c1%e7%9a%84%e7%bb%84%e5%90%88%ef%bc%8c%e4%b8%80%e4%b8%aa0%e6%88%961%e7%a7%b0%e4%b8%ba%e4%b8%80%e4%b8%aabit%ef%bc%8cASCii%e7%a0%81%e6%98%af%e4%bd%bf%e7%94%a8%e4%b8%80%e4%b8%aa%e5%ad%97%e8%8a%82%288%20bit%29%e6%9d%a5%e8%a1%a8%e7%a4%ba%e4%b8%80%e4%b8%aa%e5%ad%97%e7%ac%a6%e3%80%82%e8%80%8c%e4%b8%80%e4%b8%aa%e5%ad%97%e8%8a%82%e8%a1%a8%e7%a4%ba%e8%a1%a8%e7%a4%ba%e7%9a%84%e6%95%b0%e6%98%af%e6%9c%89%e4%b8%8a%e9%99%90%ef%bc%88%e6%9c%89%e7%ac%a6%e5%8f%b7%e6%95%b4%e6%95%b0%ef%bc%89%e7%9a%84%ef%bc%8c%e5%ae%b9%e9%87%8f%e8%8c%83%e5%9b%b4%e6%98%af0-128%e3%80%82%e5%85%b6%e4%b8%adASCII%20%e8%a1%a8%e4%b8%ad%e7%9a%84%e5%89%8d%2032%20%e4%b8%aa%e5%ad%97%e7%ac%a6%e6%98%af%e4%b8%8d%e5%8f%af%e6%89%93%e5%8d%b0%e7%9a%84%e6%8e%a7%e5%88%b6%e4%bb%a3%e7%a0%81%ef%bc%8c%e7%94%a8%e4%ba%8e%e6%8e%a7%e5%88%b6%e6%89%93%e5%8d%b0%e6%9c%ba%e7%ad%89%e5%a4%96%e5%9b%b4%e8%ae%be%e5%a4%87%e3%80%82%0a%e4%bd%86%e6%98%af127%e4%b8%aa%e5%ad%97%e7%ac%a6%e6%98%be%e7%84%b6%e6%97%a0%e6%b3%95%e4%bf%9d%e5%ad%98%e6%89%80%e6%9c%89%e5%9b%bd%e5%ae%b6%e7%9a%84%e5%ad%97%e7%ac%a6%ef%bc%8c%e5%90%8e%e6%9d%a5%e5%9c%a8ASCII%e7%a0%81%e7%9a%84%e5%9f%ba%e7%a1%80%e4%b8%8a%e8%a1%a5%e5%85%85%e4%ba%86ASCII%e6%89%a9%e5%b1%95%e7%a0%81%ef%bc%8c%e4%b9%9f%e5%b0%b1%e6%98%af128-255%e8%a1%a8%e7%a4%ba%e7%9a%84%e4%b8%80%e4%ba%9b%e5%a5%87%e5%a5%87%e6%80%aa%e6%80%aa%e7%9a%84%e5%ad%97%e7%ac%a6%e3%80%82%0aGB2312%ef%bc%8cGBK%e7%bc%96%e7%a0%81%20%e5%bd%93%e8%ae%a1%e7%ae%97%e6%9c%ba%e6%b5%81%e5%85%a5%e4%ba%86%e5%85%b7%e6%9c%89%e4%b8%8a%e4%b8%8b%e4%ba%94%e5%8d%83%e5%b9%b4%e6%96%87%e5%8c%96%e7%9a%84%e5%a4%a7%e4%b8%ad%e5%9b%bd%e4%b9%8b%e5%90%8e%ef%bc%8c%e7%aa%81%e7%84%b6%e6%9c%89%e4%b8%aa%e9%97%ae%e9%a2%98%ef%bc%8c%e5%92%b1%e4%b9%9f%e4%b8%8d%e5%a4%aa%e7%86%9f%e6%82%89%e8%8b%b1%e6%96%87%ef%bc%8c%e8%af%a5%e6%80%8e%e4%b9%88%e8%ae%a9%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%90%86%e8%a7%a3%e6%88%91%e4%bb%ac%e9%82%a3%e4%b9%88%e5%a4%9a%e7%9a%84%e6%96%87%e5%ad%97%e5%91%a2%e3%80%82%e6%98%be%e7%84%b6%e4%b8%80%e4%b8%aa%e5%ad%97%e8%8a%82%e6%89%a9%e5%b1%95%e4%b9%9f%e5%8f%aa%e8%83%bd%e8%a1%a8%e7%a4%ba255%e4%b8%aa%e5%ad%97%e7%ac%a6%ef%bc%8c%e5%bd%93%e6%97%b6%e6%9c%89%e4%b8%aaANSI%e7%bc%96%e7%a0%81%ef%bc%8c%e6%84%8f%e6%80%9d%e5%b0%b1%e6%98%af%e7%94%a8%e4%b8%a4%e4%b8%aa%e5%ad%97%e8%8a%82%e6%9d%a5%e5%bb%b6%e4%bc%b8%e6%89%a9%e5%b1%95%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%ef%bc%9b%e5%ae%83%e5%b9%b6%e4%b8%8d%e6%98%af%e4%b8%80%e4%b8%aa%e5%85%b7%e4%bd%93%e7%9a%84%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%e9%9b%86%ef%bc%8c%e8%80%8c%e6%98%af%e4%b8%80%e4%b8%aa%e9%80%9a%e4%bf%97%e7%9a%84%e6%a0%87%e5%87%86%e5%90%a7%ef%bc%88%e6%af%94%e5%a6%82%e6%88%91%e5%9b%bd%e5%9c%a8ANSI%e5%9f%ba%e7%a1%80%e4%b8%8a%e7%9a%84%e7%bc%96%e7%a0%81%e4%b8%baGB2312%ef%bc%8c%e6%97%a5%e6%96%87%e5%9c%a8ANSI%e7%bc%96%e7%a0%81%e5%9f%ba%e7%a1%80%e4%b8%8a%e7%9a%84%e7%bc%96%e7%a0%81%e4%b8%baJIS%ef%bc%89%ef%bc%8c%e5%8f%88%e7%a7%b0%e4%b8%baMBCS%28Multiple-Bytes%20Character%20Set%29%e5%a4%9a%e5%ad%97%e8%8a%82%e5%ad%97%e7%ac%a6%e9%9b%86%e3%80%82%e6%89%80%e4%bb%a5%e9%82%a3%e6%97%b6%e5%9c%a8ANSI%e7%bc%96%e7%a0%81%e7%9a%84%e5%9f%ba%e7%a1%80%e4%b8%8a%e5%8f%91%e5%b1%95%e5%a4%84%e4%ba%86%e9%80%82%e7%94%a8%e4%ba%8e%e6%b1%89%e8%af%ad%e7%9a%84GB2312%e7%bc%96%e7%a0%81%ef%bc%9b%e8%80%8cGBK%e7%bc%96%e7%a0%81%e6%98%af%e7%94%b1%e4%ba%8e%e5%90%8e%e6%9d%a5%e5%8f%91%e7%8e%b0GB2312%e7%bc%96%e7%a0%81%e9%9b%86%e5%b9%b6%e4%b8%8d%e8%83%bd%e8%a1%a8%e7%a4%ba%e6%9b%b4%e5%a4%9a%e7%9a%84%e6%b1%89%e5%ad%97%e4%ba%86%ef%bc%8c%e5%86%8d%e6%ac%a1%e5%9f%ba%e7%a1%80%e4%b8%8a%e6%9c%89%e4%ba%86%e4%b8%80%e4%b8%aa%e6%89%a9%e5%b1%95%e7%bc%96%e7%a0%81%e5%b0%b1%e6%98%afGBK%e3%80%82%0aGB2312-1980%e7%bc%96%e7%a0%81%20GB2312-1980%e6%98%af1980%e5%8f%91%e5%b8%83%e7%9a%84%e4%b8%80%e8%88%ac%e6%a0%87%e5%87%86%ef%bc%8cGB2312%e4%bd%bf%e7%94%a8%e4%b8%80%e4%b8%aa94x94%e7%9a%84%e7%9f%a9%e9%98%b5%e6%9d%a5%e5%ad%98%e5%82%a8%e5%ad%97%e7%ac%a6%e4%bf%a1%e6%81%af%ef%bc%8c%e5%85%b6%e4%b8%ad%e6%af%8f%e4%b8%80%e8%a1%8c%e7%a7%b0%e4%b8%ba%e4%b8%80%e4%b8%aa%e2%80%9c%e5%8c%ba%e2%80%9d%ef%bc%8c%e6%af%8f%e4%b8%80%e5%88%97%e7%a7%b0%e4%b8%ba%e4%b8%80%e4%b8%aa%e2%80%9c%e4%bd%8d%e2%80%9d%ef%bc%8c%e7%9f%a9%e9%98%b5%e4%b8%ad%e7%9a%84%e6%af%8f%e4%b8%80%e4%b8%aa%e5%85%83%e7%b4%a0%e5%b0%b1%e6%98%af%e7%94%a8%e5%8c%ba%e4%bd%8d%e7%a0%81%e6%9d%a5%e8%a1%a8%e7%a4%ba%e3%80%82%e5%a6%82%e7%ac%ac%e4%b8%80%e4%b8%aa%e6%b1%89%e5%ad%97%e2%80%9c%e5%95%8a%e2%80%9d%e5%87%ba%e7%8e%b0%e5%9c%a8%e7%ac%ac16%e5%8c%ba%e7%9a%84%e7%ac%ac1%e4%bd%8d%e4%b8%8a%ef%bc%8c%e5%85%b6%e5%8c%ba%e4%bd%8d%e7%a0%81%e4%b8%ba1601%e3%80%82%0a%e5%88%86%e5%8c%ba%e8%8c%83%e5%9b%b4%20%e7%ac%a6%e5%8f%b7%e7%b1%bb%e5%9e%8b%20%e7%ac%ac01%e5%8c%ba%20%e4%b8%ad%e6%96%87%e6%a0%87%e7%82%b9%e3%80%81%e6%95%b0%e5%ad%a6%e7%ac%a6%e5%8f%b7%e4%bb%a5%e5%8f%8a%e4%b8%80%e4%ba%9b%e7%89%b9%e6%ae%8a%e5%ad%97%e7%ac%a6%20%e7%ac%ac02%e5%8c%ba%20%e5%90%84%e7%a7%8d%e5%90%84%e6%a0%b7%e7%9a%84%e6%95%b0%e5%ad%97%e5%ba%8f%e5%8f%b7%20%e7%ac%ac03%e5%8c%ba%20%e5%8d%8a%e8%a7%92%e8%a5%bf%e6%96%87%e5%ad%97%e7%ac%a6%20%e7%ac%ac04%e5%8c%ba%20%e6%97%a5%e6%96%87%e5%b9%b3%e5%81%87%e5%90%8d%20%e7%ac%ac05%e5%8c%ba%20%e6%97%a5%e6%96%87%e7%89%87%e5%81%87%e5%90%8d%20%e7%ac%ac06%e5%8c%ba%20%e5%b8%8c%e8%85%8a%e5%ad%97%e6%af%8d%e8%a1%a8%20%e7%ac%ac07%e5%8c%ba%20%e4%bf%84%e6%96%87%e5%ad%97%e6%af%8d%e8%a1%a8%20%e7%ac%ac08%e5%8c%ba%20%e4%b8%ad%e6%96%87%e6%8b%bc%e9%9f%b3%e5%ad%97%e6%af%8d%e8%a1%a8%20%e7%ac%ac09%e5%8c%ba%20%e5%88%b6%e8%a1%a8%e7%ac%a6%e5%8f%b7%20%e7%ac%ac10%ef%bc%8d15%e5%8c%ba%20%e6%97%a0%e5%ad%97%e7%ac%a6%20%e7%ac%ac16%ef%bc%8d55%e5%8c%ba%20%e4%b8%80%e7%ba%a7%e6%b1%89%e5%ad%97%ef%bc%88%e4%bb%a5%e6%8b%bc%e9%9f%b3%e5%ad%97%e6%af%8d%e6%8e%92%e5%ba%8f%ef%bc%8c%20%e5%85%b13755%e4%b8%aa%ef%bc%89%20%e7%ac%ac56%ef%bc%8d87%e5%8c%ba%20%e4%ba%8c%e7%ba%a7%e6%b1%89%e5%ad%97%ef%bc%88%e4%bb%a5%e9%83%a8%e9%a6%96%e7%ac%94%e7%94%bb%e6%8e%92%e5%ba%8f%ef%bc%8c%20%e5%85%b13008%e4%b8%aa%ef%bc%89%20%e7%ac%ac88%ef%bc%8d94%e5%8c%ba%20%e6%97%a0%e5%ad%97%e7%ac%a6%20https%3a%2f%2fwww." aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.louyu.blog%2fposts%2f2022-11-13-character-encoding%2f&t=Character%20Encoding" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  LouYu 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts">Writings</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+<script src=/js/code-copy.js></script>
+
+
+
+
+</html>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>LouYu&#39;s Space</title>
-    <link>https://www.louyu.blog/</link>
-    <description>Recent content on LouYu&#39;s Space</description>
+    <title>字符编码 on LouYu&#39;s Space</title>
+    <link>https://www.louyu.blog/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/</link>
+    <description>Recent content in 字符编码 on LouYu&#39;s Space</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>LouYu</copyright>
-    <lastBuildDate>Sun, 13 Nov 2022 19:11:20 +0800</lastBuildDate><atom:link href="https://www.louyu.blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Nov 2022 19:11:20 +0800</lastBuildDate><atom:link href="https://www.louyu.blog/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Character Encoding</title>
       <link>https://www.louyu.blog/posts/2022-11-13-character-encoding/</link>
@@ -41,15 +41,6 @@ ASCII码 全称 American Standard Code For Information Interchange.
 GB2312，GBK编码 当计算机流入了具有上下五千年文化的大中国之后，突然有个问题，咱也不太熟悉英文，该怎么让计算机理解我们那么多的文字呢。显然一个字节扩展也只能表示255个字符，当时有个ANSI编码，意思就是用两个字节来延伸扩展字符编码；它并不是一个具体的字符编码集，而是一个通俗的标准吧（比如我国在ANSI基础上的编码为GB2312，日文在ANSI编码基础上的编码为JIS），又称为MBCS(Multiple-Bytes Character Set)多字节字符集。所以那时在ANSI编码的基础上发展处了适用于汉语的GB2312编码；而GBK编码是由于后来发现GB2312编码集并不能表示更多的汉字了，再次基础上有了一个扩展编码就是GBK。
 GB2312-1980编码 GB2312-1980是1980发布的一般标准，GB2312使用一个94x94的矩阵来存储字符信息，其中每一行称为一个“区”，每一列称为一个“位”，矩阵中的每一个元素就是用区位码来表示。如第一个汉字“啊”出现在第16区的第1位上，其区位码为1601。
 分区范围 符号类型 第01区 中文标点、数学符号以及一些特殊字符 第02区 各种各样的数字序号 第03区 半角西文字符 第04区 日文平假名 第05区 日文片假名 第06区 希腊字母表 第07区 俄文字母表 第08区 中文拼音字母表 第09区 制表符号 第10－15区 无字符 第16－55区 一级汉字（以拼音字母排序， 共3755个） 第56－87区 二级汉字（以部首笔画排序， 共3008个） 第88－94区 无字符 https://www.</description>
-    </item>
-    
-    <item>
-      <title>Aboutme</title>
-      <link>https://www.louyu.blog/about/</link>
-      <pubDate>Thu, 10 Nov 2022 18:16:18 +0800</pubDate>
-      
-      <guid>https://www.louyu.blog/about/</guid>
-      <description>This is Jeitoop5&amp;rsquo;s space; Github: LouYu</description>
     </item>
     
   </channel>
