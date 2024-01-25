@@ -9,20 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>新手STM32 stlink下载入坑 | LouYu的博客</title>
-    <meta property="og:title" content="新手STM32 stlink下载入坑 - LouYu的博客">
+    <title>关于我 | LouYu的博客</title>
+    <meta property="og:title" content="关于我 - LouYu的博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2024-01-24T19:31:56&#43;08:00'>
+    <meta property="article:published_time" content='2024-01-24T19:05:58&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2024-01-24T19:31:56&#43;08:00'>
+    <meta property="article:modified_time" content='2024-01-24T19:05:58&#43;08:00'>
         
     <meta name="Keywords" content="">
-    <meta name="description" content="新手STM32 stlink下载入坑">
+    <meta name="description" content="关于我">
         
     <meta name="author" content="LouYu">
-    <meta property="og:url" content="https://louyuoops.github.io/post/STM32CubeIDE_stlink_err/">
+    <meta property="og:url" content="https://louyuoops.github.io/about/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -55,13 +55,13 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://louyuoops.github.io/">Home</a>
+                    <a class="" href="https://louyuoops.github.io/">Home</a>
                     
                     <a  href="https://louyuoops.github.io/achievements/" title="工坊">工坊</a>
                     
                     <a  href="https://louyuoops.github.io/archives/" title="归档">归档</a>
                     
-                    <a  href="https://louyuoops.github.io/about/" title="关于">关于</a>
+                    <a class="current" href="https://louyuoops.github.io/about/" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -176,20 +176,13 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">新手STM32 stlink下载入坑</h1>
+            <h1 class="post-title">关于我</h1>
         </header>
         
-  <time datetime="2024-01-24T11:31:56Z" class="post-meta meta-date dt-published">
+  <time datetime="2024-01-24T11:05:58Z" class="post-meta meta-date dt-published">
     2024-01-24
   </time>
 
-
-<div class="post-meta meta-category">
-  <span>&nbsp;|</span>
-  
-    <a href='/categories/STM32%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91' target="_blank">STM32开发踩坑</a>
-  
-</div>
 
 
         
@@ -201,116 +194,20 @@
         
         
         <div class="post-content">
-            <h1 id="新手stm32-stlink下载入坑">新手STM32 stlink下载入坑</h1>
-<p>最近开始接触stm32，于是兴致冲冲的开始了新建，编译，下载&hellip;..</p>
-<p>
-        <img class="mx-auto" alt="" src="staticiShot_2024-01-24_20.49.02_cQNB1jW1HH.jpeg" />   
-    </p>
-<p>然后，不出意外的遇到了问题，</p>
-<p>
-        <img class="mx-auto" alt="" src="/image/image_T_3xDV9bs1.png" />   
-    </p>
-<p>
-        <img class="mx-auto" alt="" src="/image/image_3xazctAWQP.png" />   
-    </p>
-<p>最初，我以为是驱动的事，但是在stlink更新界面能看到stlink的id，说明驱动是没有问题的。</p>
-<p>
-        <img class="mx-auto" alt="" src="/image/image_sXslrsxV5a.png" />   
-    </p>
-<p>于是开始了bing+google，在st的论坛里有人发过类似的问题，题主说是因为他买到了仿制的芯片，重新更换了正版ST芯片就好了。于是我也怀疑我买到了国产的仿制芯片，可是芯片丝印看不清，于是我一直以为这就是个“假”芯片的问题。</p>
-<p>车到山前必有路，柳暗花明又一村。直到发现了以下文章，</p>
-<p><a href="https://blog.csdn.net/toopoo/article/details/79680323" title="MacOS之STM32CubeMX和System Workbench系列问题解决_如何结合cubemx与mc workbench生成workbench中所未包含芯片的控制程序-CSDN博客">MacOS之STM32CubeMX和System Workbench系列问题解决_如何结合cubemx与mc workbench生成workbench中所未包含芯片的控制程序-CSDN博客</a></p>
-<p>这篇文章所描述的问题和我遇到的类似，虽然他是 init mode failed ; 但是其实是一样的问题，主要是因为芯片的引脚配置错误，导致stlink在下载时初始化产生了错误。</p>
-<p>解决办法主要是以下几个步骤</p>
-<ul>
-<li>确保芯片是STM32的芯片，在cubemx界面设置sys debug(为了确保PA13,PA14引脚配置正确)</li>
-</ul>
-<p>
-        <img class="mx-auto" alt="" src="/image/image_DGcdtXnUNF.png" />   
-    </p>
-<ul>
-<li>短接开发板boot0,boot1；最初boot0和boot1是靠右短接的；boot0和boot1的作用如下</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>boot0</th>
-<th>boot1</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0，1</td>
-<td>读取芯片内部存储空间，正常运行程序</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>调试模式，通过烧录工具把修改好的代码所生成的HEX文件烧录到芯片里面，然后把boot0跳线跳回0，执行代码。</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>内置SRAM启动，通过种方法解除内部Flash的读写保护，解除读写保护的同时Flash的内容也被自动清除，以防恶意的软件拷贝。</td>
-</tr>
-</tbody>
-</table>
-<p><figure class="max-w-2xl mx-auto overflow-hidden">
-    
-        <img alt="跳帽靠近USB口短接为0" src="/image/iShot_2024-01-24_21.05.33_xwBijagDTl.jpeg" />
-    
-    <figcaption class="p-2 text-center">跳帽靠近USB口短接为0</figcaption>
-</figure></p>
-<ul>
-<li>随便烧录一个可执行程序到芯片，reset一下，然后重置两个跳帽位置</li>
-<li>然后即可正常烧录程序了</li>
-</ul>
-<p>PS：另外一个比较简单的方法是使用ST UTILITY擦除芯片，或者linux/mac使用st-flash擦除，然后记住在cubemx界面设置sys debug即可。</p>
-<p>如果按照以上步骤来看仍然不行，说明芯片的确不是ST厂的，比如我例子中的板子就是APM的芯片。ST芯片经我测试是可以恢复的。</p>
-<p>
-        <img class="mx-auto" alt="" src="/image/iShot_2024-01-24_21.59.13_MOSPzuQhVx.jpeg" />   
-    </p>
-<p>目前APM的芯片我尝试在cubeide下使用openocd也无法下载调试。</p>
-<p>总结：</p>
-<p>需要辨别芯片是否是ST的芯片，sys debug设置了st-link连接的引脚，所以需要初始化PA13,14引脚，如果没有初始化，后面无法再通过st-link下载调试，只有通过上述方法或者erase chip才行，其实两种方法都是擦除flash打到目的的。</p>
-<p>APM芯片在mac平台可以使用cubemx+vscode+openocd进行开发，windows下使用keil.</p>
-<p>最后的最后，初学者记住买板子的时候看清是ST芯片再买！！！</p>
+            <p><em>随便记录一下踩坑日常&hellip;.</em></p>
+<p>我最大的愿望就不使用写代码🙃</p>
 
         </div>
 
         
-<div class="post-archive">
-    <ul class="post-copyright">
-        <li><strong>Author: </strong><a rel="author" href="https://louyuoops.github.io/">LouYu</a></li>
-        <li style="word-break:break-all"><strong>Link: </strong><a href="https://louyuoops.github.io/post/STM32CubeIDE_stlink_err/">https://louyuoops.github.io/post/STM32CubeIDE_stlink_err/</a></li>
-        <li><strong>License: </strong>This work is under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>. Kindly fulfill the requirements of the aforementioned License when adapting or creating a derivative of this work.</li>
-    </ul>
-</div>
-<br/>
-
 
 
         
-
-<div class="post-archive">
-    <h2>See Also</h2>
-    <ul class="listing">
-        
-        <li><a href="/about/">关于我</a></li>
-        
-    </ul>
-</div>
 
 
         <div class="post-meta meta-tags">
             
-            <ul class="clearfix">
-                
-                <li><a href='/tags/STM32' target="_blank">STM32</a></li>
-                
-            </ul>
+            No tags
             
         </div>
     </article>
@@ -368,80 +265,6 @@
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
-<style type="text/css">
-div.highlight {
-    position: relative;
-    margin: 1em 0px;
-}
-
-.copy-code {
-    display: none;
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    color: rgba(255, 255, 255, 0.8);
-    background: rgba(78, 78, 78, 0.8);
-    border-radius: var(--radius);
-    padding: 0 5px;
-    font: inherit;
-    user-select: none;
-    cursor: pointer;
-    border: 0;
-    --radius: 8px;
-}
-
-div.highlight:hover .copy-code,pre:hover .copy-code {
-    display: block;
-}
-
-</style>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = 'copy';
-
-        function copyingDone() {
-            copybutton.innerHTML = 'copied!';
-            setTimeout(() => {
-                copybutton.innerHTML = 'copy';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
 
 
     <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>

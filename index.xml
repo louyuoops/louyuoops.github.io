@@ -26,12 +26,30 @@
     </item>
     
     <item>
+      <title></title>
+      <link>https://louyuoops.github.io/archives/</link>
+      <pubDate>Wed, 24 Jan 2024 19:33:17 +0800</pubDate>
+      
+      <guid>https://louyuoops.github.io/archives/</guid>
+      <description>2024 2024/1/24 新手STM32 stlink下载入坑</description>
+    </item>
+    
+    <item>
       <title>新手STM32 stlink下载入坑</title>
       <link>https://louyuoops.github.io/post/STM32CubeIDE_stlink_err/</link>
       <pubDate>Wed, 24 Jan 2024 19:31:56 +0800</pubDate>
       
       <guid>https://louyuoops.github.io/post/STM32CubeIDE_stlink_err/</guid>
       <description>新手STM32 stlink下载入坑 最近开始接触stm32，于是兴致冲冲的开始了新建，编译，下载&amp;hellip;.. 然后，不出意外的遇到了问题， 最初，我以为是驱动的事，但是在stlink更新界面能看到stlink的id，说明驱动是没有问题的。 于是开始了bing+google，在st</description>
+    </item>
+    
+    <item>
+      <title>关于我</title>
+      <link>https://louyuoops.github.io/about/</link>
+      <pubDate>Wed, 24 Jan 2024 19:05:58 +0800</pubDate>
+      
+      <guid>https://louyuoops.github.io/about/</guid>
+      <description>随便记录一下踩坑日常&amp;hellip;. 我最大的愿望就不使用写代码🙃</description>
     </item>
     
   </channel>
