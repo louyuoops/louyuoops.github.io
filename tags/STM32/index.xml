@@ -1,30 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>LouYu的博客</title>
-    <link>https://louyuoops.github.io/</link>
-    <description>Recent content on LouYu的博客</description>
+    <title>STM32 on LouYu的博客</title>
+    <link>https://louyuoops.github.io/tags/STM32/</link>
+    <description>Recent content in STM32 on LouYu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 24 Jan 2024 19:31:56 +0800</lastBuildDate><atom:link href="https://louyuoops.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>我的工坊</title>
-      <link>https://louyuoops.github.io/achievements/</link>
-      <pubDate>Thu, 25 Jan 2024 12:37:59 +0800</pubDate>
-      
-      <guid>https://louyuoops.github.io/achievements/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>搜索结果</title>
-      <link>https://louyuoops.github.io/search/</link>
-      <pubDate>Wed, 24 Jan 2024 20:43:15 +0800</pubDate>
-      
-      <guid>https://louyuoops.github.io/search/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Wed, 24 Jan 2024 19:31:56 +0800</lastBuildDate><atom:link href="https://louyuoops.github.io/tags/STM32/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>新手STM32 stlink下载入坑</title>
       <link>https://louyuoops.github.io/post/STM32CubeIDE_stlink_err/</link>

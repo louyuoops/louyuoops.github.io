@@ -2,10 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://louyuoops.github.io/achievements/</loc>
+    <lastmod>2024-01-25T12:37:59+08:00</lastmod>
+  </url><url>
+    <loc>https://louyuoops.github.io/search/</loc>
+    <lastmod>2024-01-24T20:43:15+08:00</lastmod>
+  </url><url>
     <loc>https://louyuoops.github.io/categories/</loc>
+    <lastmod>2024-01-24T19:31:56+08:00</lastmod>
   </url><url>
     <loc>https://louyuoops.github.io/</loc>
+    <lastmod>2024-01-24T19:31:56+08:00</lastmod>
+  </url><url>
+    <loc>https://louyuoops.github.io/post/</loc>
+    <lastmod>2024-01-24T19:31:56+08:00</lastmod>
+  </url><url>
+    <loc>https://louyuoops.github.io/tags/STM32/</loc>
+    <lastmod>2024-01-24T19:31:56+08:00</lastmod>
+  </url><url>
+    <loc>https://louyuoops.github.io/categories/STM32%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91/</loc>
+    <lastmod>2024-01-24T19:31:56+08:00</lastmod>
   </url><url>
     <loc>https://louyuoops.github.io/tags/</loc>
+    <lastmod>2024-01-24T19:31:56+08:00</lastmod>
+  </url><url>
+    <loc>https://louyuoops.github.io/post/STM32CubeIDE_stlink_err/</loc>
+    <lastmod>2024-01-24T19:31:56+08:00</lastmod>
   </url>
 </urlset>

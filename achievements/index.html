@@ -9,16 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>404 Page not found | LouYu的博客</title>
-    <meta property="og:title" content="404 Page not found - LouYu的博客">
+    <title>我的工坊 | LouYu的博客</title>
+    <meta property="og:title" content="我的工坊 - LouYu的博客">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2024-01-25T12:37:59&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2024-01-25T12:37:59&#43;08:00'>
         
     <meta name="Keywords" content="">
-    <meta name="description" content="404 Page not found">
+    <meta name="description" content="我的工坊">
         
     <meta name="author" content="LouYu">
-    <meta property="og:url" content="https://louyuoops.github.io/404.html">
+    <meta property="og:url" content="https://louyuoops.github.io/achievements/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -53,7 +57,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="" href="https://louyuoops.github.io/">Home</a>
                     
-                    <a  href="https://louyuoops.github.io/achievements/" title="工坊">工坊</a>
+                    <a class="current" href="https://louyuoops.github.io/achievements/" title="工坊">工坊</a>
                     
                     <a  href="https://louyuoops.github.io/archives/" title="归档">归档</a>
                     
@@ -71,22 +75,136 @@
 
                 <div class="col-8" id="main">
                     
-<div class="body404">
-    <div class="info404">
-        <header id="header404" class="clearfix">
-            <div class="site-name404"><i>404</i></div>
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">Table of Contents</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents"></nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if (leftPos < 220) {
+                postToc.css({ "width": leftPos - 10, "margin-left": (0 - leftPos) })
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+
+        if ($("#TableOfContents").children().length < 1) {
+            $(".post-toc").remove();
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">我的工坊</h1>
         </header>
-        <section>
-            <div class="title404">
-                <p>每一个平凡的日常<br />都是连续发生中的奇迹</p>
-            </div>
+        
+  <time datetime="2024-01-25T04:37:59Z" class="post-meta meta-date dt-published">
+    2024-01-25
+  </time>
+
+
+
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">&nbsp;|
+                <span id="busuanzi_value_page_pv"></span> <span>reads</span>
+            </span>
+        </div>
+        
+        
+        <div class="post-content">
             
+        </div>
+
+        
+
+
+        
 
 <div class="post-archive">
     <h2>See Also</h2>
     <ul class="listing">
-        
-        <li><a href="/achievements/">我的工坊</a></li>
         
         <li><a href="/search/">搜索结果</a></li>
         
@@ -95,9 +213,31 @@
     </ul>
 </div>
 
-            <a rel="nofollow" href="https://louyuoops.github.io/" class="index404">回首页看看</a>
-        </section>
+
+        <div class="post-meta meta-tags">
+            
+            No tags
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "louyuoops/hugo-blog-comments"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
     </div>
+    
+    
+    
+
 </div>
 
                     <footer id="footer">
@@ -120,6 +260,17 @@
 </footer>
 
 
+    
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
