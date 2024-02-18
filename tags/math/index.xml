@@ -6,7 +6,16 @@
     <description>Recent content in math on LouYu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 18 Feb 2024 17:31:56 +0800</lastBuildDate><atom:link href="https://louyuoops.github.io/tags/math/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Feb 2024 17:40:56 +0800</lastBuildDate><atom:link href="https://louyuoops.github.io/tags/math/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数学复习1-基本数学</title>
+      <link>https://louyuoops.github.io/post/math_review_1_basic/</link>
+      <pubDate>Sun, 18 Feb 2024 17:40:56 +0800</pubDate>
+      
+      <guid>https://louyuoops.github.io/post/math_review_1_basic/</guid>
+      <description>数学复习1-基本数学 数学复习这部分主要是阅读《普林斯顿微积分读本》来帮助自己回忆高等数学的知识内容；每一个复习部分相当于阅读这本书的一个阅读笔记。 基本部分主要是对函数的一个理解， 什么是函数 函数应该由什么来决定 函数图像的理解 反函数 常见的函数及图像 什么是函数 📔一个函数必须给每一个有效</description>
+    </item>
+    
     <item>
       <title>数学通用公式查询表</title>
       <link>https://louyuoops.github.io/post/math_general_formula/</link>
@@ -14,15 +23,6 @@
       
       <guid>https://louyuoops.github.io/post/math_general_formula/</guid>
       <description>通用公式查询表 通用 一元二次方程求解 $$ \begin{array}{l}a x^{2}+b x+c=0 . \\ a x^{2}+b x=-c \\ 4 a \cdot a x^{2}+4 a b x=-4 a c \\ (2 a x)^{2}+2 \cdot(2 a x \cdot b)=-4 a c \\ (2 a x)^{2}+2 \cdot(2 a x \cdot b)+b^{2}=b^{2}-4 a c \\ (2 a x+b)^{2}=b^{2}-4 a c \\ 2 a x+b= \pm \sqrt{b^{2}-4 a c} \\ x=\frac{-b \pm \sqrt{b^{2}-4 a c}}{2 a}\end{array} $$ 三角函数 常见弧度对应值 0 π/6 π/4 π/3 π/2 sin 0 1/2 $\sqrt{2}/2$ $\sqrt{3}/2$ 1 cos 1 $\sqrt{3}/2$ $\sqrt{2}/2$ 1/2 0 tan 0 $\sqrt{3}/3$ 1 $\sqrt{3}$ 三角恒等式 毕达哥拉斯定理 $$ cos^2(x) + sin^2(x) = 1</description>
-    </item>
-    
-    <item>
-      <title>数学复习1-基本数学</title>
-      <link>https://louyuoops.github.io/post/math_review_1_basic/</link>
-      <pubDate>Wed, 24 Jan 2024 17:40:56 +0800</pubDate>
-      
-      <guid>https://louyuoops.github.io/post/math_review_1_basic/</guid>
-      <description>数学复习1-基本数学 数学复习这部分主要是阅读《普林斯顿微积分读本》来帮助自己回忆高等数学的知识内容；每一个复习部分相当于阅读这本书的一个阅读笔记。 基本部分主要是对函数的一个理解， 什么是函数 函数应该由什么来决定 函数图像的理解 反函数 常见的函数及图像 什么是函数 📔一个函数必须给每一个有效</description>
     </item>
     
   </channel>
