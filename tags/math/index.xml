@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on LouYu的博客</title>
-    <link>https://louyuoops.github.io/post/</link>
-    <description>Recent content in Posts on LouYu的博客</description>
+    <title>math on LouYu的博客</title>
+    <link>https://louyuoops.github.io/tags/math/</link>
+    <description>Recent content in math on LouYu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 18 Feb 2024 17:31:56 +0800</lastBuildDate><atom:link href="https://louyuoops.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Feb 2024 17:31:56 +0800</lastBuildDate><atom:link href="https://louyuoops.github.io/tags/math/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>数学通用公式查询表</title>
       <link>https://louyuoops.github.io/post/math_general_formula/</link>
@@ -14,15 +14,6 @@
       
       <guid>https://louyuoops.github.io/post/math_general_formula/</guid>
       <description>通用公式查询表 通用 一元二次方程求解 $$ \begin{array}{l}a x^{2}+b x+c=0 . \\ a x^{2}+b x=-c \\ 4 a \cdot a x^{2}+4 a b x=-4 a c \\ (2 a x)^{2}+2 \cdot(2 a x \cdot b)=-4 a c \\ (2 a x)^{2}+2 \cdot(2 a x \cdot b)+b^{2}=b^{2}-4 a c \\ (2 a x+b)^{2}=b^{2}-4 a c \\ 2 a x+b= \pm \sqrt{b^{2}-4 a c} \\ x=\frac{-b \pm \sqrt{b^{2}-4 a c}}{2 a}\end{array} $$ 三角函数 常见弧度对应值 0 π/6 π/4 π/3 π/2 sin 0 1/2 $\sqrt{2}/2$ $\sqrt{3}/2$ 1 cos 1 $\sqrt{3}/2$ $\sqrt{2}/2$ 1/2 0 tan 0 $\sqrt{3}/3$ 1 $\sqrt{3}$ 三角恒等式 毕达哥拉斯定理 $$ cos^2(x) + sin^2(x) = 1</description>
-    </item>
-    
-    <item>
-      <title>新手STM32 stlink下载入坑</title>
-      <link>https://louyuoops.github.io/post/STM32CubeIDE_stlink_err/</link>
-      <pubDate>Wed, 24 Jan 2024 19:31:56 +0800</pubDate>
-      
-      <guid>https://louyuoops.github.io/post/STM32CubeIDE_stlink_err/</guid>
-      <description>新手STM32 stlink下载入坑 最近开始接触stm32，于是兴致冲冲的开始了新建，编译，下载&amp;hellip;.. 然后，不出意外的遇到了问题， 最初，我以为是驱动的事，但是在stlink更新界面能看到stlink的id，说明驱动是没有问题的。 于是开始了bing+google，在st</description>
     </item>
     
     <item>
